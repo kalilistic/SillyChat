@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SillyChat", "SillyChat\SillyChat.csproj", "{EBAF1BDC-2509-4504-8A4B-ED9C563FBEB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SillyChat.Test", "SillyChat.Test\SillyChat.Test.csproj", "{F69B7274-8325-41F4-AAE2-D5F99777878F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EBAF1BDC-2509-4504-8A4B-ED9C563FBEB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBAF1BDC-2509-4504-8A4B-ED9C563FBEB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBAF1BDC-2509-4504-8A4B-ED9C563FBEB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBAF1BDC-2509-4504-8A4B-ED9C563FBEB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F69B7274-8325-41F4-AAE2-D5F99777878F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F69B7274-8325-41F4-AAE2-D5F99777878F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F69B7274-8325-41F4-AAE2-D5F99777878F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F69B7274-8325-41F4-AAE2-D5F99777878F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

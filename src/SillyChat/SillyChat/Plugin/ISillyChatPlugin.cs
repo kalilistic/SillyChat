@@ -1,0 +1,28 @@
+namespace SillyChat
+{
+    /// <summary>
+    /// SillyChat plugin interface.
+    /// </summary>
+    public interface ISillyChatPlugin
+    {
+        /// <summary>
+        /// Gets or sets plugin name.
+        /// </summary>
+        string PluginName { get; set; }
+
+        /// <summary>
+        /// Gets plugin configuration.
+        /// </summary>
+        SillyChatConfig Configuration { get; }
+
+        /// <summary>
+        /// Gets translation service.
+        /// </summary>
+        TranslationService TranslationService { get; }
+
+        /// <summary>
+        /// Save plugin configuration.
+        /// </summary>
+        void SaveConfig();
+    }
+}

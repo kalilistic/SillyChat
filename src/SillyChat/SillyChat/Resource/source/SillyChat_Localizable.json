@@ -1,0 +1,34 @@
+{
+    "InstallThankYou": {
+        "message": "Thank you for installing SillyChat!",
+        "description": "SillyChatPlugin.HandleFreshInstall"
+    },
+    "Instructions": {
+        "message": "You can use /silly to toggle the plugin and /sillyconfig to view settings.",
+        "description": "SillyChatPlugin.HandleFreshInstall"
+    },
+    "ToggleCommandHelp": {
+        "message": "Toggle SillyChat.",
+        "description": "<>c__DisplayClass1_0.<.ctor>b__0"
+    },
+    "SettingsTitle": {
+        "message": "SillyChat Settings",
+        "description": "ConfigWindow..ctor"
+    },
+    "PluginEnabled": {
+        "message": "Enabled",
+        "description": "ConfigWindow.Draw"
+    },
+    "Translator_HelpMarker": {
+        "message": "enable or disable the plugin",
+        "description": "ConfigWindow.Draw"
+    },
+    "Translator": {
+        "message": "Translator",
+        "description": "ConfigWindow.Draw"
+    },
+    "ConfigCommandHelp": {
+        "message": "Show SillyChat config window.",
+        "description": "WindowManager..ctor"
+    }
+}
