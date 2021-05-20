@@ -10,6 +10,8 @@ using Dalamud.Game.Text.SeStringHandling;
 using Dalamud.Game.Text.SeStringHandling.Payloads;
 using Dalamud.Plugin;
 using DalamudPluginCommon;
+using XivCommon;
+using XivCommon.Functions;
 
 namespace SillyChat
 {
@@ -19,6 +21,7 @@ namespace SillyChat
     public class SillyChatPlugin : PluginBase, ISillyChatPlugin
     {
         private DalamudPluginInterface pluginInterface = null!;
+        private XivCommonBase common = null!;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SillyChatPlugin"/> class.
@@ -45,9 +48,15 @@ namespace SillyChat
                     this.SaveConfig();
                 }
 
+                // setup common
+                const Hooks hooks = Hooks.Talk | Hooks.BattleTalk;
+                this.common = new XivCommonBase(pluginInterface, hooks);
+
                 // setup translator
                 this.TranslationService = new TranslationService(this);
                 pluginInterface.Framework.Gui.Chat.OnChatMessage += this.OnChatMessage;
+                this.common.Functions.BattleTalk.OnBattleTalk += this.OnBattleTalk;
+                this.common.Functions.Talk.OnTalk += this.OnTalk;
 
                 // setup ui
                 this.WindowManager = new WindowManager(this, pluginInterface);
@@ -91,8 +100,11 @@ namespace SillyChat
         /// </summary>
         public new void Dispose()
         {
+            this.common.Dispose();
             base.Dispose();
             this.WindowManager.Dispose();
+            this.common.Functions.BattleTalk.OnBattleTalk -= this.OnBattleTalk;
+            this.common.Functions.Talk.OnTalk -= this.OnTalk;
             this.pluginInterface.Framework.Gui.Chat.OnChatMessage -= this.OnChatMessage;
             this.pluginInterface.CommandManager.RemoveHandler("/silly");
             this.pluginInterface.Dispose();
@@ -110,6 +122,24 @@ namespace SillyChat
             if (isHandled) return;
             var chatType = (uint)type & ~(~0 << 7);
             if (!Enum.IsDefined(typeof(SupportedChatType), chatType)) return;
+            this.Translate(message);
+        }
+
+        private void OnTalk(ref SeString name, ref SeString text, ref TalkStyle style)
+        {
+            if (!this.Configuration.Enabled) return;
+            this.Translate(text);
+        }
+
+        private void OnBattleTalk(ref SeString sender, ref SeString message, ref BattleTalkOptions options, ref bool isHandled)
+        {
+            if (!this.Configuration.Enabled) return;
+            if (isHandled) return;
+            this.Translate(message);
+        }
+
+        private void Translate(SeString message)
+        {
             try
             {
                 foreach (var payload in message.Payloads)
@@ -123,7 +153,7 @@ namespace SillyChat
             }
             catch
             {
-                Logger.LogDebug($"Failed to process chat message: {message} ({type})");
+                Logger.LogDebug($"Failed to process message: {message}.");
             }
         }
 
