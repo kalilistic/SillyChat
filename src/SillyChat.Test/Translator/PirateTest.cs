@@ -14,7 +14,7 @@ namespace SillyChat.Test
         /// <param name="translation"></param>
         [Theory]
         [InlineData("cat", "parrot")]
-        [InlineData("Hello, how are you?", @"Ahoy, how be ye?")]
+        [InlineData("Hi, how are you?", @"Ahoy, how be ye?")]
         public void StringsAreTranslatedToPirate(string input, string translation)
         {
             var plugin = new SillyChatPluginMock();

@@ -14,7 +14,7 @@ namespace SillyChat.Test
         /// <param name="translation"></param>
         [Theory]
         [InlineData("cat", "gobble")]
-        [InlineData("Hello, how are you?", @"Gobble, gobble gobble gobble?")]
+        [InlineData("Hi, how are you?", @"Gobble, gobble gobble gobble?")]
         public void StringsAreTranslatedToTurkey(string input, string translation)
         {
             var plugin = new SillyChatPluginMock();

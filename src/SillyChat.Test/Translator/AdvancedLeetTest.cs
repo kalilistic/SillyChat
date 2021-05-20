@@ -13,9 +13,8 @@ namespace SillyChat.Test
         /// <param name="input"></param>
         /// <param name="translation"></param>
         [Theory]
-        [InlineData("", "")]
         [InlineData("cat", "(@¯|¯")]
-        [InlineData("hi, how are you?", @"hai|-|()\/\/r'/()|_|?")]
+        [InlineData("Hi, how are you?", @"hai|-|()\/\/r'/()|_|?")]
         public void StringsAreTranslatedToAdvancedLeet(string input, string translation)
         {
             var plugin = new SillyChatPluginMock();

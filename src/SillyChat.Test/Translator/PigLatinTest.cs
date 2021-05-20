@@ -13,9 +13,8 @@ namespace SillyChat.Test
         /// <param name="input"></param>
         /// <param name="translation"></param>
         [Theory]
-        [InlineData("", "")]
         [InlineData("cat", "atcay")]
-        [InlineData("Hello, how are you?", @"Ellohay, owhay areway ouyay?")]
+        [InlineData("Hi, how are you?", @"Ihay, owhay areway ouyay?")]
         public void StringsAreTranslatedToPigLatin(string input, string translation)
         {
             var plugin = new SillyChatPluginMock();
