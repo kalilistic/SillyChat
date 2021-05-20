@@ -36,117 +36,117 @@ namespace SillyChat
         Alliance = 15,
 
         /// <summary>
-        /// TellOuting.
+        /// Linkshell1.
         /// </summary>
         Linkshell1 = 16,
 
         /// <summary>
-        /// TellOuting.
+        /// Linkshell2.
         /// </summary>
         Linkshell2 = 17,
 
         /// <summary>
-        /// TellOuting.
+        /// Linkshell3.
         /// </summary>
         Linkshell3 = 18,
 
         /// <summary>
-        /// TellOuting.
+        /// Linkshell4.
         /// </summary>
         Linkshell4 = 19,
 
         /// <summary>
-        /// TellOuting.
+        /// Linkshell5.
         /// </summary>
         Linkshell5 = 20,
 
         /// <summary>
-        /// TellOuting.
+        /// Linkshell6.
         /// </summary>
         Linkshell6 = 21,
 
         /// <summary>
-        /// TellOuting.
+        /// Linkshell7.
         /// </summary>
         Linkshell7 = 22,
 
         /// <summary>
-        /// TellOuting.
+        /// Linkshell8.
         /// </summary>
         Linkshell8 = 23,
 
         /// <summary>
-        /// TellOuting.
+        /// FreeCompany.
         /// </summary>
         FreeCompany = 24,
 
         /// <summary>
-        /// TellOuting.
+        /// NoviceNetwork.
         /// </summary>
         NoviceNetwork = 27,
 
         /// <summary>
-        /// TellOuting.
+        /// Yell.
         /// </summary>
         Yell = 30,
 
         /// <summary>
-        /// TellOuting.
+        /// CrossParty.
         /// </summary>
         CrossParty = 32,
 
         /// <summary>
-        /// TellOuting.
+        /// PvpTeam .
         /// </summary>
         PvpTeam = 36,
 
         /// <summary>
-        /// TellOuting.
+        /// CrossLinkshell1.
         /// </summary>
         CrossLinkshell1 = 37,
 
         /// <summary>
-        /// TellOuting.
+        /// Echo.
         /// </summary>
         Echo = 56,
 
         /// <summary>
-        /// TellOuting.
+        /// NpcDialogue.
         /// </summary>
         NpcDialogue = 61,
 
         /// <summary>
-        /// TellOuting.
+        /// CrossLinkshell2.
         /// </summary>
         CrossLinkshell2 = 101,
 
         /// <summary>
-        /// TellOuting.
+        /// CrossLinkshell3.
         /// </summary>
         CrossLinkshell3 = 102,
 
         /// <summary>
-        /// TellOuting.
+        /// CrossLinkshell4.
         /// </summary>
         CrossLinkshell4 = 103,
 
         /// <summary>
-        /// TellOuting.
+        /// CrossLinkshell5.
         /// </summary>
         CrossLinkshell5 = 104,
 
         /// <summary>
-        /// TellOuting.
+        /// CrossLinkshell6.
         /// </summary>
         CrossLinkshell6 = 105,
 
         /// <summary>
-        /// TellOuting.
+        /// CrossLinkshell7.
         /// </summary>
         CrossLinkshell7 = 106,
 
         /// <summary>
-        /// TellOuting.
+        /// CrossLinkshell8.
         /// </summary>
         CrossLinkshell8 = 107,
     }
