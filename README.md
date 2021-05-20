@@ -1,3 +1,3 @@
 # SillyChat
 
-Make chat more fun with transalations like pirate.
+Make chat more fun with translations like pirate.
