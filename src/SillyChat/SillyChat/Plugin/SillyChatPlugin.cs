@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -146,7 +147,7 @@ namespace SillyChat
                 {
                     if (payload is TextPayload textPayload)
                     {
-                        if (string.IsNullOrEmpty(textPayload.Text)) continue;
+                        if (string.IsNullOrEmpty(textPayload.Text) || textPayload.Text.Contains('\uE0BB')) continue;
                         textPayload.Text = this.TranslationService.Translate(textPayload.Text);
                     }
                 }
