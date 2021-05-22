@@ -1,1 +1,26 @@
-{}
+{
+    "Instructions": {
+        "message": "Vous pouvez utiliser /silly pour activer/désactiver le plugin et /sillyconfig pour voir les paramètres.",
+        "description": "SillyChatPlugin.HandleFreshInstall"
+    },
+    "ToggleCommandHelp": {
+        "message": "Activer/désactiver SillyChat.",
+        "description": "<>c__DisplayClass1_0.<.ctor>b__0"
+    },
+    "SettingsTitle": {
+        "message": "Paramètres de SillyChat",
+        "description": "ConfigWindow..ctor"
+    },
+    "PluginEnabled": {
+        "message": "Activé",
+        "description": "ConfigWindow.Draw"
+    },
+    "Translator": {
+        "message": "Traducteur",
+        "description": "ConfigWindow.Draw"
+    },
+    "ConfigCommandHelp": {
+        "message": "Afficher la fenêtre de configuration de SillyChat.",
+        "description": "WindowManager..ctor"
+    }
+}
