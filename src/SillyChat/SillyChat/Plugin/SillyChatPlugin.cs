@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using CheapLoc;
+using Dalamud.Game.ClientState.Actors.Types;
 using Dalamud.Game.Command;
 using Dalamud.Game.Text;
 using Dalamud.Game.Text.SeStringHandling;
@@ -50,7 +51,7 @@ namespace SillyChat
                 }
 
                 // setup common
-                const Hooks hooks = Hooks.Talk | Hooks.BattleTalk;
+                const Hooks hooks = Hooks.Talk | Hooks.BattleTalk | Hooks.ChatBubbles;
                 this.common = new XivCommonBase(pluginInterface, hooks);
 
                 // setup translator
@@ -58,6 +59,7 @@ namespace SillyChat
                 pluginInterface.Framework.Gui.Chat.OnChatMessage += this.OnChatMessage;
                 this.common.Functions.BattleTalk.OnBattleTalk += this.OnBattleTalk;
                 this.common.Functions.Talk.OnTalk += this.OnTalk;
+                this.common.Functions.ChatBubbles.OnChatBubble += this.OnChatBubble;
 
                 // setup ui
                 this.WindowManager = new WindowManager(this, pluginInterface);
@@ -107,6 +109,7 @@ namespace SillyChat
             this.common.Functions.BattleTalk.OnBattleTalk -= this.OnBattleTalk;
             this.common.Functions.Talk.OnTalk -= this.OnTalk;
             this.pluginInterface.Framework.Gui.Chat.OnChatMessage -= this.OnChatMessage;
+            this.common.Functions.ChatBubbles.OnChatBubble -= this.OnChatBubble;
             this.pluginInterface.CommandManager.RemoveHandler("/silly");
             this.pluginInterface.Dispose();
         }
@@ -137,6 +140,12 @@ namespace SillyChat
             if (!this.Configuration.Enabled) return;
             if (isHandled) return;
             this.Translate(message);
+        }
+
+        private void OnChatBubble(ref Actor actor, ref SeString text)
+        {
+            if (!this.Configuration.Enabled) return;
+            this.Translate(text);
         }
 
         private void Translate(SeString message)
