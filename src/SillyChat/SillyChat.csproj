@@ -100,8 +100,4 @@
       <EmbeddedResource Include="SillyChat\Resource\translation\zh.json" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="SillyChat\Service" />
-    </ItemGroup>
-
 </Project>

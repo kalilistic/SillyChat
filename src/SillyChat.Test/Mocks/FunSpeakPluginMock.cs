@@ -12,6 +12,7 @@ namespace SillyChat.Test
             PluginName = "SillyChat";
             Configuration = new SillyChatConfigMock();
             TranslationService = new TranslationService(this);
+            HistoryService = new HistoryService(this);
         }
 
         /// <inheritdoc />
@@ -22,6 +23,9 @@ namespace SillyChat.Test
 
         /// <inheritdoc />
         public TranslationService TranslationService { get; }
+
+        /// <inheritdoc />
+        public HistoryService HistoryService { get; }
 
         /// <inheritdoc />
         public void SaveConfig()

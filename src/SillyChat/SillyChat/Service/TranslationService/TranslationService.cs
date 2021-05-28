@@ -7,7 +7,7 @@ using DalamudPluginCommon;
 namespace SillyChat
 {
     /// <summary>
-    /// Sample service.
+    /// Orchestrate translation process.
     /// </summary>
     public class TranslationService
     {

@@ -19,5 +19,15 @@ namespace SillyChat
         /// Gets or sets translation mode.
         /// </summary>
         public int TranslationMode { get; set; } = 4;
+
+        /// <summary>
+        /// Gets or sets timer to process intervals for history view.
+        /// </summary>
+        public int ProcessTranslationInterval { get; set; } = 300000;
+
+        /// <summary>
+        /// Gets or sets max number of translations to keep in history.
+        /// </summary>
+        public int TranslationHistoryMax { get; set; } = 30;
     }
 }

@@ -5,6 +5,7 @@ using CheapLoc;
 using Dalamud.Game.Command;
 using Dalamud.Interface.Windowing;
 using Dalamud.Plugin;
+using ImGuiNET;
 
 namespace SillyChat
 {
@@ -25,6 +26,11 @@ namespace SillyChat
 
             // create windows
             this.ConfigWindow = new ConfigWindow(this.Plugin) { Size = new Vector2(180, 130) };
+            this.HistoryWindow = new HistoryWindow(this.Plugin)
+            {
+                Size = new Vector2(200, 200),
+                SizeCondition = ImGuiCond.FirstUseEver,
+            };
 
             // setup events
             this.PluginInterface.UiBuilder.OnBuildUi += this.OnBuildUi;
@@ -33,6 +39,7 @@ namespace SillyChat
             // setup window system
             this.WindowSystem = new WindowSystem("SillyChatWindowSystem");
             this.WindowSystem.AddWindow(this.ConfigWindow);
+            this.WindowSystem.AddWindow(this.HistoryWindow);
 
             // setup ui commands
             this.PluginInterface.CommandManager.AddHandler("/sillyconfig", new CommandInfo(this.ToggleConfig)
@@ -40,7 +47,17 @@ namespace SillyChat
                 HelpMessage = Loc.Localize("ConfigCommandHelp", "Show SillyChat config window."),
                 ShowInHelp = true,
             });
+            this.PluginInterface.CommandManager.AddHandler("/sillyhistory", new CommandInfo(this.ToggleHistory)
+            {
+                HelpMessage = Loc.Localize("HistoryCommandHelp", "Show SillyChat history window."),
+                ShowInHelp = true,
+            });
         }
+
+        /// <summary>
+        /// Gets config window.
+        /// </summary>
+        public HistoryWindow HistoryWindow { get; }
 
         /// <summary>
         /// Gets config window.
@@ -61,6 +78,12 @@ namespace SillyChat
             this.PluginInterface.UiBuilder.OnBuildUi -= this.OnBuildUi;
             this.PluginInterface.UiBuilder.OnOpenConfigUi -= this.OnOpenConfigUi;
             this.PluginInterface.CommandManager.RemoveHandler("/sillyconfig");
+            this.PluginInterface.CommandManager.RemoveHandler("/sillyhistory");
+        }
+
+        private void ToggleHistory(string command, string args)
+        {
+            this.HistoryWindow!.IsOpen ^= true;
         }
 
         private void ToggleConfig(string command, string args)

@@ -21,6 +21,11 @@ namespace SillyChat
         TranslationService TranslationService { get; }
 
         /// <summary>
+        /// Gets history service.
+        /// </summary>
+        HistoryService HistoryService { get; }
+
+        /// <summary>
         /// Save plugin configuration.
         /// </summary>
         void SaveConfig();

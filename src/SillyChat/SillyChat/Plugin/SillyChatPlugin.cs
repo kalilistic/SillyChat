@@ -56,6 +56,7 @@ namespace SillyChat
 
                 // setup translator
                 this.TranslationService = new TranslationService(this);
+                this.HistoryService = new HistoryService(this);
                 pluginInterface.Framework.Gui.Chat.OnChatMessage += this.OnChatMessage;
                 this.common.Functions.BattleTalk.OnBattleTalk += this.OnBattleTalk;
                 this.common.Functions.Talk.OnTalk += this.OnTalk;
@@ -81,6 +82,11 @@ namespace SillyChat
         /// </summary>
         public TranslationService TranslationService { get; private set; } = null!;
 
+        /// <summary>
+        /// Gets historyService.
+        /// </summary>
+        public HistoryService HistoryService { get; private set; } = null!;
+
         /// <inheritdoc/>
         public new string PluginName { get; set; } = null!;
 
@@ -103,6 +109,7 @@ namespace SillyChat
         /// </summary>
         public new void Dispose()
         {
+            this.HistoryService.Dispose();
             this.common.Dispose();
             base.Dispose();
             this.WindowManager.Dispose();
@@ -156,8 +163,15 @@ namespace SillyChat
                 {
                     if (payload is TextPayload textPayload)
                     {
-                        if (string.IsNullOrEmpty(textPayload.Text) || textPayload.Text.Contains('\uE0BB')) continue;
-                        textPayload.Text = this.TranslationService.Translate(textPayload.Text);
+                        var input = textPayload.Text;
+                        if (string.IsNullOrEmpty(input) || input.Contains('\uE0BB')) continue;
+                        var output = this.TranslationService.Translate(input);
+                        if (!input.Equals(output))
+                        {
+                            textPayload.Text = output;
+                            Logger.LogDebug($"{input}|{output}");
+                            this.HistoryService.AddTranslation(new Translation(input, output));
+                        }
                     }
                 }
             }
@@ -177,7 +191,7 @@ namespace SillyChat
             this.Chat.PrintNotice(Loc.Localize("InstallThankYou", "Thank you for installing SillyChat!"));
             Thread.Sleep(500);
             this.Chat.PrintNotice(
-                Loc.Localize("Instructions", "You can use /silly to toggle the plugin and /sillyconfig to view settings."));
+                Loc.Localize("Instructions", "You can use /silly to toggle the plugin, /sillyconfig to view settings, and /sillyhistory to see previous translations."));
             this.Configuration.FreshInstall = false;
             this.SaveConfig();
             this.WindowManager.ConfigWindow!.IsOpen = true;
