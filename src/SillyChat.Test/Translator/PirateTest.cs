@@ -3,7 +3,7 @@ using Xunit;
 namespace SillyChat.Test
 {
     /// <summary>
-    /// Advanced Leet Test.
+    /// Pirate Test.
     /// </summary>
     public class PirateTest
     {

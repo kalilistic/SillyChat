@@ -69,6 +69,7 @@ namespace SillyChat
                 new (3, "Pig Latin", new PigLatinTranslator(plugin)),
                 new (4, "Pirate", new PirateTranslator(plugin)),
                 new (5, "Turkey", new TurkeyTranslator(plugin)),
+                new (6, "Urianger", new UriangerTranslator(plugin)),
             };
             return translationModes.OrderBy(x => x.Name).ToList();
         }

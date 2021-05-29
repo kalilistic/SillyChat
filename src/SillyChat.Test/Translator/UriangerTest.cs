@@ -3,9 +3,9 @@ using Xunit;
 namespace SillyChat.Test
 {
     /// <summary>
-    /// Turkey Test.
+    /// Urianger Test.
     /// </summary>
-    public class TurkeyTest
+    public class UriangerTest
     {
         /// <summary>
         /// Test translation.
@@ -13,12 +13,12 @@ namespace SillyChat.Test
         /// <param name="input"></param>
         /// <param name="translation"></param>
         [Theory]
-        [InlineData("cat", "gobble")]
-        [InlineData("Hi, how are you?", @"Gobble, gobble gobble gobble?")]
-        public void StringsAreTranslatedToTurkey(string input, string translation)
+        [InlineData("cat", "Cat.")]
+        [InlineData("Hi, how are you?", @"Hail, how art thou?")]
+        public void StringsAreTranslatedToUrianger(string input, string translation)
         {
             var plugin = new SillyChatPluginMock();
-            var translator = new TurkeyTranslator(plugin);
+            var translator = new UriangerTranslator(plugin);
             Assert.Equal(translation, translator.Translate(input));
         }
         
