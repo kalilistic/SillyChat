@@ -94,6 +94,7 @@ namespace SillyChat
             str = str.Replace(" i ", " I ");
             str = str.Replace(" i' ", " I' ");
             str = str.Replace("?.", "?");
+            str = str.Replace("??", "?");
             return str;
         }
 
