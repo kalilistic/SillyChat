@@ -1,1 +1,54 @@
-{}
+{
+    "InstallThankYou": {
+        "message": "SillyChatをインストールしていただきありがとうございます！",
+        "description": "SillyChatPlugin.HandleFreshInstall"
+    },
+    "Instructions": {
+        "message": "/sillyでプラグインの切り替え、/sillyconfigで設定を確認し、/sillyhistoryで過去の翻訳を確認することができます。",
+        "description": "SillyChatPlugin.HandleFreshInstall"
+    },
+    "ToggleCommandHelp": {
+        "message": "SillyChatの切り替え。",
+        "description": "<>c__DisplayClass2_0.<.ctor>b__0"
+    },
+    "SettingsTitle": {
+        "message": "SillyChat 設定",
+        "description": "ConfigWindow..ctor"
+    },
+    "PluginEnabled": {
+        "message": "有効",
+        "description": "ConfigWindow.Draw"
+    },
+    "Translator_HelpMarker": {
+        "message": "プラグインを有効/無効化する",
+        "description": "ConfigWindow.Draw"
+    },
+    "Translator": {
+        "message": "Translator",
+        "description": "ConfigWindow.Draw"
+    },
+    "HistoryTitle": {
+        "message": "SillyChat 履歴",
+        "description": "HistoryWindow..ctor"
+    },
+    "SourceMessage": {
+        "message": "ソース",
+        "description": "HistoryWindow.Draw"
+    },
+    "TranslationMessage": {
+        "message": "翻訳",
+        "description": "HistoryWindow.Draw"
+    },
+    "NoTranslations": {
+        "message": "まだ翻訳がありません。",
+        "description": "HistoryWindow.Draw"
+    },
+    "ConfigCommandHelp": {
+        "message": "SillyChat 設定ウィンドウを表示します。",
+        "description": "WindowManager..ctor"
+    },
+    "HistoryCommandHelp": {
+        "message": "SillyChat 履歴ウィンドウを表示します。",
+        "description": "WindowManager..ctor"
+    }
+}
