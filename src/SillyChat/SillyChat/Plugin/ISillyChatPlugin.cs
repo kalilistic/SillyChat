@@ -6,11 +6,6 @@ namespace SillyChat
     public interface ISillyChatPlugin
     {
         /// <summary>
-        /// Gets or sets plugin name.
-        /// </summary>
-        string PluginName { get; set; }
-
-        /// <summary>
         /// Gets plugin configuration.
         /// </summary>
         SillyChatConfig Configuration { get; }

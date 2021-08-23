@@ -87,7 +87,9 @@ namespace SillyChat
         /// </summary>
         public HistoryService HistoryService { get; private set; } = null!;
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets plugin name.
+        /// </summary>
         public new string PluginName { get; set; } = null!;
 
         /// <inheritdoc/>
