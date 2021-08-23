@@ -27,8 +27,28 @@
         "message": "Traductor",
         "description": "ConfigWindow.Draw"
     },
+    "HistoryTitle": {
+        "message": "Historial de SillyChat",
+        "description": "HistoryWindow..ctor"
+    },
+    "SourceMessage": {
+        "message": "Fuente",
+        "description": "HistoryWindow.Draw"
+    },
+    "TranslationMessage": {
+        "message": "Traducción",
+        "description": "HistoryWindow.Draw"
+    },
+    "NoTranslations": {
+        "message": "Aún no se ha traducido nada.",
+        "description": "HistoryWindow.Draw"
+    },
     "ConfigCommandHelp": {
         "message": "Mostrar ventana de configuración de SillyChat.",
+        "description": "WindowManager..ctor"
+    },
+    "HistoryCommandHelp": {
+        "message": "Mostrar ventana del historial de SillyChat.",
         "description": "WindowManager..ctor"
     }
 }

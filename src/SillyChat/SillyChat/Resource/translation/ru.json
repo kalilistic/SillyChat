@@ -1,1 +1,54 @@
-{}
+{
+    "InstallThankYou": {
+        "message": "Спасибо, что установили SillyChat!",
+        "description": "SillyChatPlugin.HandleFreshInstall"
+    },
+    "Instructions": {
+        "message": "Вы можете использовать /silly для включения плагина, /sillyconfig для просмотра настроек и /sillyhistory для просмотра предыдущих переводов.",
+        "description": "SillyChatPlugin.HandleFreshInstall"
+    },
+    "ToggleCommandHelp": {
+        "message": "Включить SillyChat.",
+        "description": "<>c__DisplayClass2_0.<.ctor>b__0"
+    },
+    "SettingsTitle": {
+        "message": "Настройки SillyChat",
+        "description": "ConfigWindow..ctor"
+    },
+    "PluginEnabled": {
+        "message": "Включить",
+        "description": "ConfigWindow.Draw"
+    },
+    "Translator_HelpMarker": {
+        "message": "включение или отключение плагина",
+        "description": "ConfigWindow.Draw"
+    },
+    "Translator": {
+        "message": "Переводчик",
+        "description": "ConfigWindow.Draw"
+    },
+    "HistoryTitle": {
+        "message": "История SillyChat",
+        "description": "HistoryWindow..ctor"
+    },
+    "SourceMessage": {
+        "message": "Источник",
+        "description": "HistoryWindow.Draw"
+    },
+    "TranslationMessage": {
+        "message": "Перевод",
+        "description": "HistoryWindow.Draw"
+    },
+    "NoTranslations": {
+        "message": "Ещё ничего не было переведено.",
+        "description": "HistoryWindow.Draw"
+    },
+    "ConfigCommandHelp": {
+        "message": "Показать окно настроек SillyChat.",
+        "description": "WindowManager..ctor"
+    },
+    "HistoryCommandHelp": {
+        "message": "Показать историю SillyChat.",
+        "description": "WindowManager..ctor"
+    }
+}
