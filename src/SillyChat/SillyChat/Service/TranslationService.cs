@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using DalamudPluginCommon;
+using Dalamud.DrunkenToad;
 
 namespace SillyChat
 {

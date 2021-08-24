@@ -46,19 +46,11 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Dalamud.DrunkenToad" Version="1.0.8" />
         <PackageReference Include="DalamudPackager" Version="1.2.1" />
         <PackageReference Include="Fody" Version="6.5.1" PrivateAssets="all" />
         <PackageReference Include="ILMerge.Fody" Version="1.16.0" PrivateAssets="all" />
-        <PackageReference Include="XivCommon" Version="1.5.2" />
-    </ItemGroup>
-	
-    <ItemGroup>
-        <PackageReference Include="DalamudPluginCommon" Version="0.0.0-alpha.0.57" /> 
-				<!--
-				<Reference Include="DalamudPluginCommon, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-				    <HintPath>..\..\..\DalamudPluginCommon\src\DalamudPluginCommon\bin\Debug\net48\DalamudPluginCommon.dll</HintPath>
-        </Reference>
-				-->
+        <PackageReference Include="XivCommon" Version="2.3.0" />
     </ItemGroup>
 		
     <ItemGroup>

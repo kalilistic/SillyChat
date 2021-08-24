@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-using DalamudPluginCommon;
+using Dalamud.DrunkenToad;
 
 // ReSharper disable ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
 // ReSharper disable ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator
