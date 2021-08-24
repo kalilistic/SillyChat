@@ -5,8 +5,6 @@ using System.Text.RegularExpressions;
 
 using Dalamud.DrunkenToad;
 
-// ReSharper disable ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
-// ReSharper disable ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator
 namespace SillyChat
 {
     /// <summary>

@@ -1,74 +1,47 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net48</TargetFramework>
-        <LangVersion>latest</LangVersion>
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <Nullable>enable</Nullable>
-        <RootNamespace>SillyChat</RootNamespace>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    </PropertyGroup>
-
-     <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' != 'true'"> 
-       <TreatWarningsAsErrors>true</TreatWarningsAsErrors> 
-    </PropertyGroup> 
+		<PropertyGroup>
+			<Title>SillyChat</Title>
+			<Authors>kalilistic</Authors>
+			<TargetFramework>net48</TargetFramework>
+			<LangVersion>9</LangVersion>
+			<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+			<Nullable>enable</Nullable>
+			<Deterministic>true</Deterministic>
+			<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+			<GenerateDocumentationFile>true</GenerateDocumentationFile>
+			<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+			<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+			<DalamudLibPath>$(appdata)\XIVLauncher\addon\Hooks\dev\</DalamudLibPath>
+		</PropertyGroup>
+	
+		<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+			<DebugSymbols>true</DebugSymbols>
+			<DebugType>full</DebugType>
+			<Optimize>false</Optimize>
+			<OutputPath>bin\Debug\</OutputPath>
+			<DefineConstants>DEBUG;TRACE</DefineConstants>
+			<ErrorReport>prompt</ErrorReport>
+			<WarningLevel>4</WarningLevel>
+		</PropertyGroup>
+		
+		<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+			<DebugType>pdbonly</DebugType>
+			<Optimize>true</Optimize>
+			<OutputPath>bin\Release\</OutputPath>
+			<DefineConstants>TRACE</DefineConstants>
+			<ErrorReport>prompt</ErrorReport>
+			<WarningLevel>4</WarningLevel>
+		</PropertyGroup>
 	
     <ItemGroup>
-        <Reference Include="CheapLoc">
-          <HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\CheapLoc.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="Dalamud">
-            <HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\Dalamud.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
-        <Reference Include="ImGui.NET">
-            <HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\ImGui.NET.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
-        <Reference Include="ImGuiScene">
-            <HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\ImGuiScene.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
-        <Reference Include="Lumina">
-            <HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\Lumina.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
-        <Reference Include="Lumina.Excel">
-            <HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\Lumina.Excel.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
-        <Reference Include="Microsoft.CSharp" />
-		<Reference Include="System.Memory">
-            <HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\System.Memory.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Dalamud.DrunkenToad" Version="1.0.8" />
-        <PackageReference Include="DalamudPackager" Version="1.2.1" />
-        <PackageReference Include="Fody" Version="6.5.1" PrivateAssets="all" />
-        <PackageReference Include="ILMerge.Fody" Version="1.16.0" PrivateAssets="all" />
-        <PackageReference Include="XivCommon" Version="2.3.0" />
+			<None Remove="stylecop.json" />
+			<AdditionalFiles Include="..\stylecop.json">
+				<Link>stylecop.json</Link>
+			</AdditionalFiles>
     </ItemGroup>
 		
-    <ItemGroup>
-        <None Remove="stylecop.json" />
-    </ItemGroup>
-    <ItemGroup>
-        <AdditionalFiles Include="..\stylecop.json">
-				    <Link>stylecop.json</Link>
-        </AdditionalFiles>
-    </ItemGroup>
-    <ItemGroup>
-      <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
-    </ItemGroup>
-
-    <ItemGroup>
+		<ItemGroup>
       <None Remove="SillyChat\Resource\loc\de.json" />
       <None Remove="SillyChat\Resource\loc\es.json" />
       <None Remove="SillyChat\Resource\loc\fr.json" />
@@ -81,15 +54,94 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Include="SillyChat\Resource\translation\de.json" />
-      <EmbeddedResource Include="SillyChat\Resource\translation\es.json" />
-      <EmbeddedResource Include="SillyChat\Resource\translation\fr.json" />
-      <EmbeddedResource Include="SillyChat\Resource\translation\it.json" />
-      <EmbeddedResource Include="SillyChat\Resource\translation\ja.json" />
-      <EmbeddedResource Include="SillyChat\Resource\translation\no.json" />
-      <EmbeddedResource Include="SillyChat\Resource\translation\pt.json" />
-      <EmbeddedResource Include="SillyChat\Resource\translation\ru.json" />
-      <EmbeddedResource Include="SillyChat\Resource\translation\zh.json" />
+			<Reference Include="CheapLoc">
+				<HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\CheapLoc.dll</HintPath>
+				<Private>False</Private>
+			</Reference>
+			<Reference Include="Dalamud">
+					<HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\Dalamud.dll</HintPath>
+					<Private>False</Private>
+			</Reference>
+			<Reference Include="ImGui.NET">
+					<HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\ImGui.NET.dll</HintPath>
+					<Private>False</Private>
+			</Reference>
+			<Reference Include="ImGuiScene">
+					<HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\ImGuiScene.dll</HintPath>
+					<Private>False</Private>
+			</Reference>
+			<Reference Include="Lumina">
+					<HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\Lumina.dll</HintPath>
+					<Private>False</Private>
+			</Reference>
+			<Reference Include="Lumina.Excel">
+					<HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\Lumina.Excel.dll</HintPath>
+					<Private>False</Private>
+			</Reference>
+			<Reference Include="Microsoft.CSharp" />
+			<Reference Include="System.Memory">
+				<HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\System.Memory.dll</HintPath>
+				<Private>False</Private>
+			</Reference>
     </ItemGroup>
+
+    <ItemGroup>
+			<PackageReference Include="ILRepack" Version="2.0.18" />
+			<PackageReference Include="DalamudPackager" Version="1.2.1" />
+			<PackageReference Include="Dalamud.DrunkenToad" Version="1.0.8" />
+			<PackageReference Include="XivCommon" Version="2.3.0" />
+      <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+		
+		<ItemGroup>
+      <Folder Include="SillyChat\Resource\translation" />
+    </ItemGroup>
+		
+		<ItemGroup>
+			<None Remove="SillyChat\Resource\translation\de.json" />
+			<EmbeddedResource Include="SillyChat\Resource\translation\de.json" />
+			<None Remove="SillyChat\Resource\translation\es.json" />
+			<EmbeddedResource Include="SillyChat\Resource\translation\es.json" />
+			<None Remove="SillyChat\Resource\translation\fr.json" />
+			<EmbeddedResource Include="SillyChat\Resource\translation\fr.json" />
+			<None Remove="SillyChat\Resource\translation\it.json" />
+			<EmbeddedResource Include="SillyChat\Resource\translation\it.json" />
+			<None Remove="SillyChat\Resource\translation\ja.json" />
+			<EmbeddedResource Include="SillyChat\Resource\translation\ja.json" />
+			<None Remove="SillyChat\Resource\translation\no.json" />
+			<EmbeddedResource Include="SillyChat\Resource\translation\no.json" />
+			<None Remove="SillyChat\Resource\translation\pt.json" />
+			<EmbeddedResource Include="SillyChat\Resource\translation\pt.json" />
+			<None Remove="SillyChat\Resource\translation\ru.json" />
+			<EmbeddedResource Include="SillyChat\Resource\translation\ru.json" />
+			<None Remove="SillyChat\Resource\translation\zh.json" />
+			<EmbeddedResource Include="SillyChat\Resource\translation\zh.json" />
+		</ItemGroup>
+		
+    <Target Name="ILRepack" AfterTargets="Build">
+			<ItemGroup>
+				<InputAssemblies Include="$(TargetPath)" />
+				<InputAssemblies Include="$(TargetDir)*.dll" Exclude="$(TargetPath)" />
+			</ItemGroup>
+			<Exec Command="$(PkgILRepack)\tools\ILRepack.exe /union /lib:$(DalamudLibPath) /out:$(TargetDir)$(TargetFileName) @(InputAssemblies, ' ')" />
+		</Target>
+
+		<Target Name="CleanOutDir" AfterTargets="ILRepack">
+			<ItemGroup>
+				<DeleteAssemblies Include="$(TargetDir)*.dll" Exclude="$(TargetPath)" />
+			</ItemGroup>
+			<Message Text="Deleting @(DeleteAssemblies)" Importance="high" />
+			<Delete Files="@(DeleteAssemblies)" />
+		</Target>
+	
+		<Target Name="LivePluginLoadCopy" AfterTargets="CleanOutDir" Condition=" '$(Configuration)' == 'Debug' ">
+			<Message Text="Copying for LPL" Importance="high" />
+			<Exec Command="if not exist $(TargetDir)LPL ( mkdir $(TargetDir)LPL )" />
+			<Exec Command="copy $(TargetPath) $(TargetDir)LPL\$(TargetFileName)" />
+			<Exec Command="copy $(TargetDir)*.pdb $(TargetDir)LPL\" />
+		</Target>
 
 </Project>

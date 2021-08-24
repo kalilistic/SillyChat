@@ -47,8 +47,6 @@ namespace SillyChat
                 else
                 {
                     var outputWord = string.Empty;
-
-                    // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
                     foreach (var ch in word)
                     {
                         var outputCh = this.MappedCharacters.ContainsKey(ch) ? this.MappedCharacters[ch] : ch.ToString();

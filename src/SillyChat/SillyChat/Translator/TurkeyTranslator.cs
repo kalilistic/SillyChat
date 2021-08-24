@@ -22,8 +22,6 @@ namespace SillyChat
         {
             var words = input.Split(' ');
             var output = new List<string>();
-
-            // ReSharper disable once LoopCanBeConvertedToQuery
             foreach (var word in words)
             {
                 string gobble = char.IsUpper(word.First()) ? "Gobble" : "gobble";

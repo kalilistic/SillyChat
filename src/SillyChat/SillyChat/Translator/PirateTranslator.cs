@@ -26,8 +26,6 @@ namespace SillyChat
         {
             var words = input.Split(' ');
             var output = new List<string>();
-
-            // ReSharper disable once LoopCanBeConvertedToQuery
             foreach (var word in words)
             {
                 string currentWord = char.IsPunctuation(word.Last()) ? string.Concat(word.Take(word.Length - 1)) : word;
