@@ -25,9 +25,10 @@
 					<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 					<PrivateAssets>all</PrivateAssets>
 			</PackageReference>
-			<Reference Include="SillyChat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-			  <HintPath>..\SillyChat\bin\Release\SillyChat.dll</HintPath>
-			</Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\SillyChat\SillyChat.csproj" />
     </ItemGroup>
 
 </Project>
