@@ -3,15 +3,17 @@
 		<PropertyGroup>
 			<Title>SillyChat</Title>
 			<Authors>kalilistic</Authors>
-			<TargetFramework>net48</TargetFramework>
+			<TargetFramework>net5.0-windows</TargetFramework>
+			<Platforms>x64</Platforms>
 			<LangVersion>9</LangVersion>
 			<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 			<Nullable>enable</Nullable>
 			<Deterministic>true</Deterministic>
-			<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+			<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 			<GenerateDocumentationFile>true</GenerateDocumentationFile>
 			<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 			<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+			<OutputPath>bin\$(Configuration)\</OutputPath>
 			<DalamudLibPath>$(appdata)\XIVLauncher\addon\Hooks\dev\</DalamudLibPath>
 		</PropertyGroup>
 	
@@ -78,18 +80,13 @@
 					<HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\Lumina.Excel.dll</HintPath>
 					<Private>False</Private>
 			</Reference>
-			<Reference Include="Microsoft.CSharp" />
-			<Reference Include="System.Memory">
-				<HintPath>$(AppData)\XIVLauncher\addon\Hooks\dev\System.Memory.dll</HintPath>
-				<Private>False</Private>
-			</Reference>
     </ItemGroup>
 
     <ItemGroup>
 			<PackageReference Include="ILRepack" Version="2.0.18" />
-			<PackageReference Include="DalamudPackager" Version="1.2.1" />
-			<PackageReference Include="Dalamud.DrunkenToad" Version="1.0.8" />
-			<PackageReference Include="XivCommon" Version="2.3.0" />
+			<PackageReference Include="DalamudPackager" Version="2.1.2" />
+      <PackageReference Include="Dalamud.DrunkenToad" Version="1.1.2" />
+      <PackageReference Include="XivCommon" Version="3.0.1" />
       <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -121,7 +118,14 @@
 			<EmbeddedResource Include="SillyChat\Resource\translation\zh.json" />
 		</ItemGroup>
 		
-    <Target Name="ILRepack" AfterTargets="Build">
+		<Target Name="CopyDeps" AfterTargets="Build">
+			<Message Text="Copy dependencies into bin" Importance="high" />
+			<Exec Command="dotnet publish -c $(Configuration) --no-build" />
+			<Exec Command="copy $(TargetDir)publish\XivCommon.dll $(TargetDir)XivCommon.dll" />
+			<Exec Command="copy $(TargetDir)publish\Dalamud.DrunkenToad.dll $(TargetDir)Dalamud.DrunkenToad.dll" />
+		</Target>
+		
+    <Target Name="ILRepack" AfterTargets="CopyDeps">
 			<ItemGroup>
 				<InputAssemblies Include="$(TargetPath)" />
 				<InputAssemblies Include="$(TargetDir)*.dll" Exclude="$(TargetPath)" />
@@ -129,19 +133,36 @@
 			<Exec Command="$(PkgILRepack)\tools\ILRepack.exe /union /lib:$(DalamudLibPath) /out:$(TargetDir)$(TargetFileName) @(InputAssemblies, ' ')" />
 		</Target>
 
-		<Target Name="CleanOutDir" AfterTargets="ILRepack">
-			<ItemGroup>
-				<DeleteAssemblies Include="$(TargetDir)*.dll" Exclude="$(TargetPath)" />
-			</ItemGroup>
-			<Message Text="Deleting @(DeleteAssemblies)" Importance="high" />
-			<Delete Files="@(DeleteAssemblies)" />
+		<Target Name="DevPluginsCopy" AfterTargets="ILRepack" Condition="'$(Configuration)' == 'Debug'">
+			<Message Text="Copying to DevPlugins" Importance="high" />
+			<Exec Command="if not exist $(AppData)\XIVLauncher\devPlugins\$(TargetName) (mkdir $(AppData)\XIVLauncher\devPlugins\$(TargetName))" />
+			<Exec Command="copy $(TargetPath) $(AppData)\XIVLauncher\devPlugins\$(TargetName)\$(TargetFileName)" />
+			<Exec Command="copy $(TargetDir)*.pdb $(AppData)\XIVLauncher\devPlugins\$(TargetName)" />
 		</Target>
-	
-		<Target Name="LivePluginLoadCopy" AfterTargets="CleanOutDir" Condition=" '$(Configuration)' == 'Debug' ">
-			<Message Text="Copying for LPL" Importance="high" />
-			<Exec Command="if not exist $(TargetDir)LPL ( mkdir $(TargetDir)LPL )" />
-			<Exec Command="copy $(TargetPath) $(TargetDir)LPL\$(TargetFileName)" />
-			<Exec Command="copy $(TargetDir)*.pdb $(TargetDir)LPL\" />
+		
+		<Target Name="CleanOutDir" AfterTargets="ILRepack" Condition=" '$(Configuration)' == 'Release' ">
+			<ItemGroup>
+				<DeleteFiles 
+					Include="$(TargetDir)*.dll;$(TargetDir)*.xml;$(TargetDir)*.pdb;$(TargetDir)*deps.json" 
+					Exclude="$(TargetPath)" />
+				<DeleteDirs 
+					Include="$(TargetDir)publish;$(TargetDir)ref"/>
+			</ItemGroup>
+			<Message Text="Deleting @(DeleteFiles)" Importance="high" />
+			<Delete Files="@(DeleteFiles)" />
+			<Message Text="Deleting @(DeleteDirs)" Importance="high" />
+			<RemoveDir Directories="@(DeleteDirs)" />
 		</Target>
 
+		<Target Name="DalamudPackager" AfterTargets="CleanOutDir" Condition=" '$(Configuration)' == 'Release' ">
+			<Message Text="Starting DalamudPackager" Importance="high" />
+			<DalamudPackager ProjectDir="$(ProjectDir)" OutputPath="$(OutputPath)" AssemblyName="$(AssemblyName)" VersionComponents="4" MakeZip="true"/>
+		</Target>
+		
+		<Target Name="CopyImages" AfterTargets="DalamudPackager" Condition=" '$(Configuration)' == 'Release' ">
+			<Message Text="Starting to copy images into plugin package" Importance="high" />
+			<MakeDir Directories="$(TargetDir)images" />
+			<Exec Command="copy $(ProjectDir)..\..\assets\*.png $(TargetDir)images\*.png" />
+		</Target>
+					
 </Project>
