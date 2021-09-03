@@ -29,7 +29,7 @@ jobs:
         run: |
           git config pull.rebase false
           git remote add upstream https://github.com/goatcorp/DalamudPlugins
-          git pull upstream api4
+          git pull upstream api4 --allow-unrelated-histories
           git checkout api4
           git push origin api4 --force
           git checkout -b ${{env.PLUGIN_NAME}}-api4-${{ steps.getrel.outputs.release}}
