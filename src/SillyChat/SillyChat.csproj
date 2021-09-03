@@ -15,6 +15,7 @@
 			<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
 			<OutputPath>bin\$(Configuration)\</OutputPath>
 			<DalamudLibPath>$(appdata)\XIVLauncher\addon\Hooks\dev\</DalamudLibPath>
+			<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 		</PropertyGroup>
 	
 		<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -117,52 +118,32 @@
 			<None Remove="SillyChat\Resource\translation\zh.json" />
 			<EmbeddedResource Include="SillyChat\Resource\translation\zh.json" />
 		</ItemGroup>
-		
-		<Target Name="CopyDeps" AfterTargets="Build">
-			<Message Text="Copy dependencies into bin" Importance="high" />
-			<Exec Command="dotnet publish -c $(Configuration) --no-build" />
-			<Exec Command="copy $(TargetDir)publish\XivCommon.dll $(TargetDir)XivCommon.dll" />
-			<Exec Command="copy $(TargetDir)publish\Dalamud.DrunkenToad.dll $(TargetDir)Dalamud.DrunkenToad.dll" />
-		</Target>
-		
-    <Target Name="ILRepack" AfterTargets="CopyDeps">
-			<ItemGroup>
-				<InputAssemblies Include="$(TargetPath)" />
-				<InputAssemblies Include="$(TargetDir)*.dll" Exclude="$(TargetPath)" />
-			</ItemGroup>
-			<Exec Command="$(PkgILRepack)\tools\ILRepack.exe /union /lib:$(DalamudLibPath) /out:$(TargetDir)$(TargetFileName) @(InputAssemblies, ' ')" />
-		</Target>
 
-		<Target Name="DevPluginsCopy" AfterTargets="ILRepack" Condition="'$(Configuration)' == 'Debug'">
-			<Message Text="Copying to DevPlugins" Importance="high" />
+		<Target Name="PostBuild" AfterTargets="Build">
+			<ItemGroup>
+				<InputAssemblies Include="$(TargetPath);$(TargetDir)*.dll" Exclude="$(TargetPath)" />
+			</ItemGroup>
+			<MakeDir Directories="$(TargetDir)out\" />
+			<Exec Command="copy $(TargetDir)$(TargetFileName) $(TargetDir)out\$(TargetFileName)" />
+			<Exec Command="copy $(TargetDir)XivCommon.dll $(TargetDir)out\XivCommon.dll" />
+			<Exec Command="copy $(TargetDir)Dalamud.DrunkenToad.dll $(TargetDir)out\Dalamud.DrunkenToad.dll" />
+			<Exec Command="$(PkgILRepack)\tools\ILRepack.exe /union /lib:$(DalamudLibPath) /out:$(TargetDir)out\$(TargetFileName) @(InputAssemblies, ' ')" />
+		</Target>
+		
+		<Target Name="PostBuild_Debug" AfterTargets="PostBuild" Condition="'$(Configuration)' == 'Debug'">
 			<Exec Command="if not exist $(AppData)\XIVLauncher\devPlugins\$(TargetName) (mkdir $(AppData)\XIVLauncher\devPlugins\$(TargetName))" />
-			<Exec Command="copy $(TargetPath) $(AppData)\XIVLauncher\devPlugins\$(TargetName)\$(TargetFileName)" />
+			<Exec Command="copy $(TargetDir)out\$(TargetFileName) $(AppData)\XIVLauncher\devPlugins\$(TargetName)\$(TargetFileName)" />
 			<Exec Command="copy $(TargetDir)*.pdb $(AppData)\XIVLauncher\devPlugins\$(TargetName)" />
 		</Target>
 		
-		<Target Name="CleanOutDir" AfterTargets="ILRepack" Condition=" '$(Configuration)' == 'Release' ">
+		<Target Name="PostBuild_Release" AfterTargets="PostBuild" Condition=" '$(Configuration)' == 'Release' ">
 			<ItemGroup>
-				<DeleteFiles 
-					Include="$(TargetDir)*.dll;$(TargetDir)*.xml;$(TargetDir)*.pdb;$(TargetDir)*deps.json" 
-					Exclude="$(TargetPath)" />
-				<DeleteDirs 
-					Include="$(TargetDir)publish;$(TargetDir)ref"/>
+				<DeleteFiles Include="$(TargetDir)out\*.dll" Exclude="$(TargetDir)out\$(TargetFileName)" />
 			</ItemGroup>
-			<Message Text="Deleting @(DeleteFiles)" Importance="high" />
 			<Delete Files="@(DeleteFiles)" />
-			<Message Text="Deleting @(DeleteDirs)" Importance="high" />
-			<RemoveDir Directories="@(DeleteDirs)" />
+			<DalamudPackager ProjectDir="$(ProjectDir)" OutputPath="$(OutputPath)out\" AssemblyName="$(AssemblyName)" VersionComponents="4" MakeZip="true"/>
+			<MakeDir Directories="$(TargetDir)out\$(AssemblyName)\images" />
+			<Exec Command="copy $(ProjectDir)..\..\assets\*.png $(TargetDir)out\$(AssemblyName)\images\*.png" />
 		</Target>
-
-		<Target Name="DalamudPackager" AfterTargets="CleanOutDir" Condition=" '$(Configuration)' == 'Release' ">
-			<Message Text="Starting DalamudPackager" Importance="high" />
-			<DalamudPackager ProjectDir="$(ProjectDir)" OutputPath="$(OutputPath)" AssemblyName="$(AssemblyName)" VersionComponents="4" MakeZip="true"/>
-		</Target>
-		
-		<Target Name="CopyImages" AfterTargets="DalamudPackager" Condition=" '$(Configuration)' == 'Release' ">
-			<Message Text="Starting to copy images into plugin package" Importance="high" />
-			<MakeDir Directories="$(TargetDir)images" />
-			<Exec Command="copy $(ProjectDir)..\..\assets\*.png $(TargetDir)images\*.png" />
-		</Target>
-					
+	
 </Project>

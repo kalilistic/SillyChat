@@ -27,8 +27,10 @@ jobs:
 
       - name: Sync fork and set branch
         run: |
+          git config pull.rebase false
           git remote add upstream https://github.com/goatcorp/DalamudPlugins
           git pull upstream api4
+          git checkout api4
           git push
           git checkout -b ${{env.PLUGIN_NAME}}-api4-${{ steps.getrel.outputs.release}}
 
