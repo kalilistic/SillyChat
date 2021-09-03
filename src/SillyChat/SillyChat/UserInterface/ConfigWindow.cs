@@ -31,7 +31,7 @@ namespace SillyChat
                 this.Plugin.SaveConfig();
             }
 
-            ImGuiComponents.HelpMarker(Loc.Localize("Translator_HelpMarker", "enable or disable the plugin"));
+            ImGuiComponents.HelpMarker(Loc.Localize("PluginEnabled_HelpMarker", "enable or disable the plugin"));
             ImGui.Spacing();
 
             // translator

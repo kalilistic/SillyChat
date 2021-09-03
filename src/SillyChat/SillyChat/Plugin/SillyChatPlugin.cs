@@ -1,15 +1,17 @@
 using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 using CheapLoc;
+using Dalamud.Configuration;
 using Dalamud.DrunkenToad;
-using Dalamud.Game.ClientState.Actors.Types;
+using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Game.Command;
+using Dalamud.Game.Gui;
 using Dalamud.Game.Text;
 using Dalamud.Game.Text.SeStringHandling;
 using Dalamud.Game.Text.SeStringHandling.Payloads;
+using Dalamud.IoC;
 using Dalamud.Plugin;
 using XivCommon;
 using XivCommon.Functions;
@@ -19,36 +21,27 @@ namespace SillyChat
     /// <summary>
     /// SillyChat Plugin.
     /// </summary>
-    public class SillyChatPlugin : ISillyChatPlugin
+    public class SillyChatPlugin : ISillyChatPlugin, IDalamudPlugin
     {
-        /// <summary>
-        /// Plugin service.
-        /// </summary>
-        public PluginService PluginService = null!;
-
-        /// <summary>
-        /// XivCommon library instance.
-        /// </summary>
-        public XivCommonBase XivCommon = null!;
+        private XivCommonBase xivCommon = null!;
+        private Localization localization = null!;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SillyChatPlugin"/> class.
         /// </summary>
-        /// <param name="pluginName">Plugin name.</param>
-        /// <param name="pluginInterface">Plugin interface.</param>
-        public SillyChatPlugin(string pluginName, DalamudPluginInterface pluginInterface)
+        public SillyChatPlugin()
         {
             Task.Run(() =>
             {
                 // setup common libs
-                this.PluginService = new PluginService(pluginName, pluginInterface);
+                this.localization = new Localization(PluginInterface, CommandManager);
                 const Hooks hooks = Hooks.Talk | Hooks.BattleTalk | Hooks.ChatBubbles;
-                this.XivCommon = new XivCommonBase(pluginInterface, hooks);
+                this.xivCommon = new XivCommonBase(hooks);
 
                 // load config
                 try
                 {
-                    this.Configuration = this.PluginService.LoadConfig() as PluginConfig ?? new PluginConfig();
+                    this.Configuration = PluginInterface.GetPluginConfig() as PluginConfig ?? new PluginConfig();
                 }
                 catch (Exception ex)
                 {
@@ -60,25 +53,50 @@ namespace SillyChat
                 // setup translator
                 this.TranslationService = new TranslationService(this);
                 this.HistoryService = new HistoryService(this);
-                pluginInterface.Framework.Gui.Chat.OnChatMessage += this.OnChatMessage;
-                this.XivCommon.Functions.BattleTalk.OnBattleTalk += this.OnBattleTalk;
-                this.XivCommon.Functions.Talk.OnTalk += this.OnTalk;
-                this.XivCommon.Functions.ChatBubbles.OnChatBubble += this.OnChatBubble;
+                Chat.ChatMessage += this.ChatMessage;
+                this.xivCommon.Functions.BattleTalk.OnBattleTalk += this.OnBattleTalk;
+                this.xivCommon.Functions.Talk.OnTalk += this.OnTalk;
+
+                this.xivCommon.Functions.ChatBubbles.OnChatBubble += this.OnChatBubble;
 
                 // setup ui
-                this.WindowManager = new WindowManager(this, pluginInterface);
+                this.WindowManager = new WindowManager(this);
 
                 // special handling for fresh install
                 this.HandleFreshInstall();
 
                 // toggle
-                this.PluginService.PluginInterface.CommandManager.AddHandler("/silly", new CommandInfo(this.TogglePlugin)
+                CommandManager.AddHandler("/silly", new CommandInfo(this.TogglePlugin)
                 {
                     HelpMessage = Loc.Localize("ToggleCommandHelp", "Toggle SillyChat."),
                     ShowInHelp = true,
                 });
             });
         }
+
+        /// <summary>
+        /// Gets pluginInterface.
+        /// </summary>
+        [PluginService]
+        [RequiredVersion("1.0")]
+        public static DalamudPluginInterface PluginInterface { get; private set; } = null!;
+
+        /// <summary>
+        /// Gets chat gui.
+        /// </summary>
+        [PluginService]
+        [RequiredVersion("1.0")]
+        public static ChatGui Chat { get; private set; } = null!;
+
+        /// <summary>
+        /// Gets command manager.
+        /// </summary>
+        [PluginService]
+        [RequiredVersion("1.0")]
+        public static CommandManager CommandManager { get; private set; } = null!;
+
+        /// <inheritdoc />
+        public string Name => "SillyChat";
 
         /// <summary>
         /// Gets translationService.
@@ -106,7 +124,7 @@ namespace SillyChat
         /// <inheritdoc/>
         public void SaveConfig()
         {
-            this.PluginService.SaveConfig(this.Configuration);
+            PluginInterface.SavePluginConfig((IPluginConfiguration)this.Configuration);
         }
 
         /// <summary>
@@ -120,22 +138,24 @@ namespace SillyChat
                 this.WindowManager.Dispose();
 
                 // plugin service
-                this.PluginService.PluginInterface.CommandManager.RemoveHandler("/silly");
-                this.PluginService.PluginInterface.Framework.Gui.Chat.OnChatMessage -= this.OnChatMessage;
-                this.PluginService.Dispose();
+                CommandManager.RemoveHandler("/silly");
+                Chat.ChatMessage -= this.ChatMessage;
 
                 // xiv common
-                this.XivCommon.Functions.ChatBubbles.OnChatBubble -= this.OnChatBubble;
-                this.XivCommon.Functions.BattleTalk.OnBattleTalk -= this.OnBattleTalk;
-                this.XivCommon.Functions.Talk.OnTalk -= this.OnTalk;
-                this.XivCommon.Dispose();
+                this.xivCommon.Functions.ChatBubbles.OnChatBubble -= this.OnChatBubble;
+                this.xivCommon.Functions.BattleTalk.OnBattleTalk -= this.OnBattleTalk;
+                this.xivCommon.Functions.Talk.OnTalk -= this.OnTalk;
+                this.xivCommon.Dispose();
+
+                // localization
+                this.localization.Dispose();
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex, "Failed to dispose plugin properly.");
             }
 
-            this.PluginService.PluginInterface.Dispose();
+            PluginInterface.Dispose();
         }
 
         private void TogglePlugin(string command, string args)
@@ -144,31 +164,59 @@ namespace SillyChat
             this.SaveConfig();
         }
 
-        private void OnChatMessage(XivChatType type, uint senderId, ref SeString sender, ref SeString message, ref bool isHandled)
+        private void ChatMessage(XivChatType type, uint senderId, ref SeString sender, ref SeString message, ref bool isHandled)
         {
-            if (!this.Configuration.Enabled) return;
-            if (isHandled) return;
+            if (!this.Configuration.Enabled)
+            {
+                return;
+            }
+
+            if (isHandled)
+            {
+                return;
+            }
+
             var chatType = (uint)type & ~(~0 << 7);
-            if (!Enum.IsDefined(typeof(SupportedChatType), chatType)) return;
+            if (!Enum.IsDefined(typeof(SupportedChatType), chatType))
+            {
+                return;
+            }
+
             this.Translate(message);
         }
 
         private void OnTalk(ref SeString name, ref SeString text, ref TalkStyle style)
         {
-            if (!this.Configuration.Enabled) return;
+            if (!this.Configuration.Enabled)
+            {
+                return;
+            }
+
             this.Translate(text);
         }
 
         private void OnBattleTalk(ref SeString sender, ref SeString message, ref BattleTalkOptions options, ref bool isHandled)
         {
-            if (!this.Configuration.Enabled) return;
-            if (isHandled) return;
+            if (!this.Configuration.Enabled)
+            {
+                return;
+            }
+
+            if (isHandled)
+            {
+                return;
+            }
+
             this.Translate(message);
         }
 
-        private void OnChatBubble(ref Actor actor, ref SeString text)
+        private void OnChatBubble(ref GameObject gameObject, ref SeString text)
         {
-            if (!this.Configuration.Enabled) return;
+            if (!this.Configuration.Enabled)
+            {
+                return;
+            }
+
             this.Translate(text);
         }
 
@@ -181,7 +229,11 @@ namespace SillyChat
                     if (payload is TextPayload textPayload)
                     {
                         var input = textPayload.Text;
-                        if (string.IsNullOrEmpty(input) || input.Contains('\uE0BB')) continue;
+                        if (string.IsNullOrEmpty(input) || input.Contains('\uE0BB'))
+                        {
+                            continue;
+                        }
+
                         var output = this.TranslationService.Translate(input);
                         if (!input.Equals(output))
                         {
@@ -205,9 +257,9 @@ namespace SillyChat
                 return;
             }
 
-            this.PluginService.Chat.PrintNotice(Loc.Localize("InstallThankYou", "Thank you for installing SillyChat!"));
+            Chat.PluginPrintNotice(Loc.Localize("InstallThankYou", "Thank you for installing SillyChat!"));
             Thread.Sleep(500);
-            this.PluginService.Chat.PrintNotice(
+            Chat.PluginPrintNotice(
                 Loc.Localize("Instructions", "You can use /silly to toggle the plugin, /sillyconfig to view settings, and /sillyhistory to see previous translations."));
             this.Configuration.FreshInstall = false;
             this.SaveConfig();

@@ -1,4 +1,13 @@
 ﻿name: SillyChat
 author: kalilistic
-description: Make chat more fun with translations like pirate and urianger.
+punchline: Make chat more fun with translations like pirate and urianger.
+description: |-
+    Allows you to translate player and NPC chat messages/bubbles.
+    Supported languages include: Pirate, Urianger, Leet, Pig Latin, and Turkey.
+tags:
+    - chat
 repo_url: https://github.com/kalilistic/SillyChat
+icon_url: https://github.com/goatcorp/DalamudPlugins/blob/api4/plugins/SillyChat/images/icon.png
+image_urls:
+    - https://github.com/goatcorp/DalamudPlugins/blob/api4/plugins/SillyChat/images/image1.png
+dalamud_api_level: 4

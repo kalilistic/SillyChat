@@ -9,7 +9,7 @@
     },
     "ToggleCommandHelp": {
         "message": "Toggle SillyChat.",
-        "description": "<>c__DisplayClass2_0.<.ctor>b__0"
+        "description": "SillyChatPlugin.<.ctor>b__2_0"
     },
     "SettingsTitle": {
         "message": "SillyChat Settings",
@@ -19,12 +19,16 @@
         "message": "Enabled",
         "description": "ConfigWindow.Draw"
     },
-    "Translator_HelpMarker": {
+    "PluginEnabled_HelpMarker": {
         "message": "enable or disable the plugin",
         "description": "ConfigWindow.Draw"
     },
     "Translator": {
         "message": "Translator",
+        "description": "ConfigWindow.Draw"
+    },
+    "Translator_HelpMarker": {
+        "message": "select translator to use for chat text",
         "description": "ConfigWindow.Draw"
     },
     "HistoryTitle": {

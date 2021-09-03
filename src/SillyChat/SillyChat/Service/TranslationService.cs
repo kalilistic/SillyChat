@@ -11,15 +11,8 @@ namespace SillyChat
     /// </summary>
     public class TranslationService
     {
-        /// <summary>
-        /// Translation modes.
-        /// </summary>
-        public readonly List<TranslationMode> TranslationModes;
-
-        /// <summary>
-        /// Translator.
-        /// </summary>
-        public BaseTranslator Translator = null!;
+        private readonly List<TranslationMode> translationModes;
+        private BaseTranslator translator = null!;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TranslationService"/> class.
@@ -27,7 +20,7 @@ namespace SillyChat
         /// <param name="plugin">SillyChat plugin.</param>
         public TranslationService(ISillyChatPlugin plugin)
         {
-            this.TranslationModes = GetModes(plugin);
+            this.translationModes = GetModes(plugin);
             this.SetTranslationMode(plugin.Configuration.TranslationMode);
         }
 
@@ -38,7 +31,7 @@ namespace SillyChat
         /// <returns>translated text.</returns>
         public string Translate(string input)
         {
-            return this.Translator.Translate(input);
+            return this.translator.Translate(input);
         }
 
         /// <summary>
@@ -47,7 +40,7 @@ namespace SillyChat
         /// <param name="code">translation mode code.</param>
         public void SetTranslationMode(int code)
         {
-            this.Translator = this.GetTranslationMode(code).Translator;
+            this.translator = this.GetTranslationMode(code).Translator;
         }
 
         /// <summary>
@@ -56,7 +49,7 @@ namespace SillyChat
         /// <returns>array of translation mode names.</returns>
         public string[] GetTranslationModeNames()
         {
-            return this.TranslationModes.Select(x => x.Name).ToArray();
+            return this.translationModes.Select(x => x.Name).ToArray();
         }
 
         private static List<TranslationMode> GetModes(ISillyChatPlugin plugin)
@@ -78,12 +71,12 @@ namespace SillyChat
         {
             try
             {
-                return this.TranslationModes.First(x => x.Code == code);
+                return this.translationModes.First(x => x.Code == code);
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex, "Failed to get translation mode.");
-                return this.TranslationModes.First();
+                return this.translationModes.First();
             }
         }
     }
