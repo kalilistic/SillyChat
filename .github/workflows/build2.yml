@@ -5,6 +5,7 @@ on:
 
 env:
   PLUGIN_NAME: SillyChat
+  PERSONAL_PLUGIN_REPO: kalilistic/DalamudPluginRepo
 
 jobs:
   build:
@@ -65,6 +66,15 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: ${{env.PERSONAL_PLUGIN_REPO}}
+        token: ${{secrets.PAT}}
+        ref: api4
+    - uses: actions/download-artifact@v2
+      with:
+        name: PluginRepoZip
+        path: plugins/${{env.PLUGIN_NAME}}
     - uses: EndBug/add-and-commit@v7
       with:
         add: --all
