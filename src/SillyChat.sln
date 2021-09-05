@@ -16,6 +16,6 @@ Global
 		{EBAF1BDC-2509-4504-8A4B-ED9C563FBEB6}.Release|Any CPU.Build.0 = Release|x64
 		{F69B7274-8325-41F4-AAE2-D5F99777878F}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{F69B7274-8325-41F4-AAE2-D5F99777878F}.Release|Any CPU.ActiveCfg = Release|x64
-		{F69B7274-8325-41F4-AAE2-D5F99777878F}.Release|Any CPU.Build.0 = Release|x64
+		{F69B7274-8325-41F4-AAE2-D5F99777878F}.Debug|Any CPU.Build.0 = Debug|x64
 	EndGlobalSection
 EndGlobal
