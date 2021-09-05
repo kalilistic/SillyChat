@@ -70,7 +70,6 @@ jobs:
       with:
         repository: ${{env.PERSONAL_PLUGIN_REPO}}
         token: ${{secrets.PAT}}
-        ref: api4
     - uses: actions/download-artifact@v2
       with:
         name: PluginRepoZip
@@ -78,7 +77,6 @@ jobs:
     - uses: EndBug/add-and-commit@v7
       with:
         add: --all
-        branch: api4
         author_name: GitHub Action
         author_email: github-actions[bot]@users.noreply.github.com
         message: Update ${{env.PLUGIN_NAME}}
