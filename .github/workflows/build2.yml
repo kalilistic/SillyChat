@@ -5,7 +5,10 @@ on:
 
 env:
   PLUGIN_NAME: SillyChat
+  SOLUTION_NAME: SillyChat
+  INTERNAL_NAME: SillyChat
   PERSONAL_PLUGIN_REPO: kalilistic/DalamudPluginRepo
+  PR_PLUGIN_REPO: kalilistic/DalamudPlugins
 
 jobs:
   build:
@@ -92,6 +95,7 @@ jobs:
         name: PluginRepoZip
         path: PluginArtifact
     - uses: kalilistic/DalamudPluginPR@master
-      with: 
+      with:
+        enabled: true
         token: ${{secrets.PAT}}
         artifact_path: ${{steps.download-artifact.outputs.download-path}}
