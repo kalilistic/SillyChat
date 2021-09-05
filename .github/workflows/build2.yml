@@ -5,10 +5,7 @@ on:
 
 env:
   PLUGIN_NAME: SillyChat
-  SOLUTION_NAME: SillyChat
-  INTERNAL_NAME: SillyChat
   PERSONAL_PLUGIN_REPO: kalilistic/DalamudPluginRepo
-  PR_PLUGIN_REPO: kalilistic/DalamudPlugins
 
 jobs:
   build:
