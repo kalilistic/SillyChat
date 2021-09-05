@@ -36,7 +36,7 @@ jobs:
         dotnet build ./src --no-restore --configuration Release --nologo /property:Version=${{steps.gitversion.outputs.MajorMinorPatch}}
     - name: Run xUnit Tests
       run: |
-        dotnet test ./src/${{env.PLUGIN_NAME}}.Test/${{env.PLUGIN_NAME}}.Test.csproj
+        dotnet test ./src/${{env.PLUGIN_NAME}}.Test/${{env.PLUGIN_NAME}}.Test.csproj --configuration Release
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.1
       with:
