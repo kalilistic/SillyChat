@@ -9,7 +9,7 @@
     },
     "ToggleCommandHelp": {
         "message": "SillyChatの切り替え。",
-        "description": "<>c__DisplayClass2_0.<.ctor>b__0"
+        "description": "SillyChatPlugin.<.ctor>b__2_0"
     },
     "SettingsTitle": {
         "message": "SillyChat 設定",
@@ -19,12 +19,12 @@
         "message": "有効",
         "description": "ConfigWindow.Draw"
     },
-    "Translator_HelpMarker": {
-        "message": "プラグインを有効/無効化する",
-        "description": "ConfigWindow.Draw"
-    },
     "Translator": {
         "message": "Translator",
+        "description": "ConfigWindow.Draw"
+    },
+    "Translator_HelpMarker": {
+        "message": "プラグインを有効/無効化する",
         "description": "ConfigWindow.Draw"
     },
     "HistoryTitle": {
