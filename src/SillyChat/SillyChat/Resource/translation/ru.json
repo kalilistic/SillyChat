@@ -9,7 +9,7 @@
     },
     "ToggleCommandHelp": {
         "message": "Включить SillyChat.",
-        "description": "<>c__DisplayClass2_0.<.ctor>b__0"
+        "description": "SillyChatPlugin.<.ctor>b__2_0"
     },
     "SettingsTitle": {
         "message": "Настройки SillyChat",
@@ -19,12 +19,12 @@
         "message": "Включить",
         "description": "ConfigWindow.Draw"
     },
-    "Translator_HelpMarker": {
-        "message": "включение или отключение плагина",
-        "description": "ConfigWindow.Draw"
-    },
     "Translator": {
         "message": "Переводчик",
+        "description": "ConfigWindow.Draw"
+    },
+    "Translator_HelpMarker": {
+        "message": "включение или отключение плагина",
         "description": "ConfigWindow.Draw"
     },
     "HistoryTitle": {
