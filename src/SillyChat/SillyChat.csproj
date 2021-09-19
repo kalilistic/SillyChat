@@ -88,7 +88,7 @@
 			<PackageReference Include="ILRepack" Version="2.0.18" />
 			<PackageReference Include="DalamudPackager" Version="2.1.2" />
       <PackageReference Include="Dalamud.DrunkenToad" Version="1.1.2" />
-      <PackageReference Include="XivCommon" Version="3.0.1" />
+      <PackageReference Include="XivCommon" Version="3.0.2" />
       <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -132,7 +132,7 @@
 		
 		<Target Name="CopyToDevPlugins" AfterTargets="MergeDeps" Condition="'$(Configuration)' == 'Debug'">
 			<Exec Command="if not exist $(AppData)\XIVLauncher\devPlugins\$(TargetName) (mkdir $(AppData)\XIVLauncher\devPlugins\$(TargetName))" />
-			<Exec Command="copy $(TargetDir)out\$(TargetFileName) $(AppData)\XIVLauncher\devPlugins\$(TargetName)\$(TargetFileName)" />
+			<Exec Command="copy $(TargetDir)$(TargetFileName) $(AppData)\XIVLauncher\devPlugins\$(TargetName)\$(TargetFileName)" />
 			<Exec Command="copy $(TargetDir)*.pdb $(AppData)\XIVLauncher\devPlugins\$(TargetName)" />
 		</Target>
 		
