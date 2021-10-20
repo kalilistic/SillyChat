@@ -19,8 +19,16 @@
         "message": "Activé",
         "description": "ConfigWindow.Draw"
     },
+    "PluginEnabled_HelpMarker": {
+        "message": "activer ou désactiver le plugin",
+        "description": "ConfigWindow.Draw"
+    },
     "Translator": {
         "message": "Traducteur",
+        "description": "ConfigWindow.Draw"
+    },
+    "Translator_HelpMarker": {
+        "message": "sélectionnez le traducteur à utiliser pour le texte du chat",
         "description": "ConfigWindow.Draw"
     },
     "HistoryTitle": {
