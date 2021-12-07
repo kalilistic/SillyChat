@@ -7,7 +7,7 @@ description: |-
 tags:
     - chat
 repo_url: https://github.com/kalilistic/SillyChat
-icon_url: https://github.com/goatcorp/DalamudPlugins/blob/api4/plugins/SillyChat/images/icon.png
+icon_url: https://github.com/goatcorp/DalamudPlugins/blob/api5/plugins/SillyChat/images/icon.png
 image_urls:
-    - https://github.com/goatcorp/DalamudPlugins/blob/api4/plugins/SillyChat/images/image1.png
-dalamud_api_level: 4
+    - https://github.com/goatcorp/DalamudPlugins/blob/api5/plugins/SillyChat/images/image1.png
+dalamud_api_level: 5
