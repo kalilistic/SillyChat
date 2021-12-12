@@ -54,17 +54,17 @@ namespace SillyChat
 
         private static List<TranslationMode> GetModes(ISillyChatPlugin plugin)
         {
-            var translationModes = new List<TranslationMode>
+            return new ()
             {
-                new (0, "Leet (L1)", new BasicLeetTranslator(plugin)),
-                new (1, "Leet (L2)", new IntermediateLeetTranslator(plugin)),
-                new (2, "Leet (L3)", new AdvancedLeetTranslator(plugin)),
-                new (3, "Pig Latin", new PigLatinTranslator(plugin)),
-                new (4, "Pirate", new PirateTranslator(plugin)),
-                new (5, "Turkey", new TurkeyTranslator(plugin)),
-                new (6, "Urianger", new UriangerTranslator(plugin)),
+                new TranslationMode(0, "Leet (L1)", new BasicLeetTranslator(plugin)),
+                new TranslationMode(1, "Leet (L2)", new IntermediateLeetTranslator(plugin)),
+                new TranslationMode(2, "Leet (L3)", new AdvancedLeetTranslator(plugin)),
+                new TranslationMode(3, "Pig Latin", new PigLatinTranslator(plugin)),
+                new TranslationMode(4, "Pirate", new PirateTranslator(plugin)),
+                new TranslationMode(5, "Turkey", new TurkeyTranslator(plugin)),
+                new TranslationMode(6, "Urianger", new UriangerTranslator(plugin)),
+                new TranslationMode(7, "Toad", new ToadTranslator(plugin)),
             };
-            return translationModes.OrderBy(x => x.Name).ToList();
         }
 
         private TranslationMode GetTranslationMode(int code)
