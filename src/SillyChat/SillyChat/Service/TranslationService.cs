@@ -64,6 +64,7 @@ namespace SillyChat
                 new TranslationMode(5, "Turkey", new TurkeyTranslator(plugin)),
                 new TranslationMode(6, "Urianger", new UriangerTranslator(plugin)),
                 new TranslationMode(7, "Toad", new ToadTranslator(plugin)),
+                new TranslationMode(8, "Owo", new OwoTranslator(plugin)),
             };
         }
 
