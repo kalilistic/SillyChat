@@ -1,1 +1,58 @@
-{}
+{
+    "InstallThankYou": {
+        "message": "感谢您安装 SillyChat!",
+        "description": "SillyChatPlugin.HandleFreshInstall"
+    },
+    "Instructions": {
+        "message": "您可以使用 /silly 启用或关闭插件、 /sillyconfig 查看设置和 /sillyhistory 查看翻译历史。",
+        "description": "SillyChatPlugin.HandleFreshInstall"
+    },
+    "ToggleCommandHelp": {
+        "message": "切换 SillyChat",
+        "description": "SillyChatPlugin.<.ctor>b__2_0"
+    },
+    "SettingsTitle": {
+        "message": "SillyChat 设置",
+        "description": "ConfigWindow..ctor"
+    },
+    "PluginEnabled": {
+        "message": "已启用",
+        "description": "ConfigWindow.Draw"
+    },
+    "PluginEnabled_HelpMarker": {
+        "message": "启用或禁用插件",
+        "description": "ConfigWindow.Draw"
+    },
+    "Translator": {
+        "message": "翻译器",
+        "description": "ConfigWindow.Draw"
+    },
+    "Translator_HelpMarker": {
+        "message": "选择用于聊天文本的翻译器",
+        "description": "ConfigWindow.Draw"
+    },
+    "HistoryTitle": {
+        "message": "SillyChat 历史",
+        "description": "HistoryWindow..ctor"
+    },
+    "SourceMessage": {
+        "message": "来源",
+        "description": "HistoryWindow.Draw"
+    },
+    "TranslationMessage": {
+        "message": "翻译",
+        "description": "HistoryWindow.Draw"
+    },
+    "NoTranslations": {
+        "message": "尚未翻译任何内容。",
+        "description": "HistoryWindow.Draw"
+    },
+    "ConfigCommandHelp": {
+        "message": "显示 SillyChat 配置窗口。",
+        "description": "WindowManager..ctor"
+    },
+    "HistoryCommandHelp": {
+        "message": "显示 SillyChat 历史窗口。",
+        "description": "WindowManager..ctor"
+    }
+}
