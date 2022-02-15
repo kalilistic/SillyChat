@@ -93,6 +93,7 @@ namespace SillyChat
             str = str.Replace(" i' ", " I' ");
             str = str.Replace("?.", "?");
             str = str.Replace("??", "?");
+            str = str.Replace("dont", "don't");
             return str;
         }
 
@@ -201,6 +202,25 @@ namespace SillyChat
             this.mappedWords.Add("sup", "How fares the realm?");
             this.mappedWords.Add("possess", "possesseth");
             this.mappedWords.Add("idk", "I know not");
+            this.mappedWords.Add("ikr?", "The meaning of these words now shines clear.");
+            this.mappedWords.Add("sucks", "seems undesirable");
+            this.mappedWords.Add("btw", "Let us speak of another matter.");
+            this.mappedWords.Add("cmon", "I pray thee.");
+            this.mappedWords.Add("gg", "We art returned whole from thy grueling trial.");
+            this.mappedWords.Add("ok", "The meaning of these words now shines clear.");
+            this.mappedWords.Add("internet", "linkshell");
+            this.mappedWords.Add("ban", "exile");
+            this.mappedWords.Add("fun", "joy");
+            this.mappedWords.Add("guys", "men");
+            this.mappedWords.Add("guy", "man");
+            this.mappedWords.Add("xd", "...I jest.");
+            this.mappedWords.Add(";_;", "It is unfortunate.");
+            this.mappedWords.Add("stop", "restrain");
+            this.mappedWords.Add("wanna", "desire");
+            this.mappedWords.Add("rn", "at the moment");
+            this.mappedWords.Add("soon", "ere long");
+            this.mappedWords.Add("texted", "writ");
+            this.mappedWords.Add("byebye", "farewell");
         }
     }
 }
