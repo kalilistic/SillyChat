@@ -154,8 +154,6 @@ namespace SillyChat
             {
                 Logger.LogError(ex, "Failed to dispose plugin properly.");
             }
-
-            PluginInterface.Dispose();
         }
 
         private void TogglePlugin(string command, string args)

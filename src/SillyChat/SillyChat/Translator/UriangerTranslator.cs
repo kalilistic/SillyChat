@@ -221,7 +221,6 @@ namespace SillyChat
             this.mappedWords.Add(":d", "Words cannot well express my joy");
             this.mappedWords.Add("?", "What will you ask?");
             this.mappedWords.Add("<3", "I have more than words for you, my friend.");
-
         }
     }
 }
