@@ -1,1 +1,58 @@
-{}
+{
+    "InstallThankYou": {
+        "message": "Vielen Dank das du SillyChat installiert hast!",
+        "description": "SillyChatPlugin.HandleFreshInstall"
+    },
+    "Instructions": {
+        "message": "Sie können /silly verwenden, um das Plugin einzuschalten, /sillyconfig, um die Einstellungen zu sehen, und /sillyhistory, um vorherige Übersetzungen zu sehen.",
+        "description": "SillyChatPlugin.HandleFreshInstall"
+    },
+    "ToggleCommandHelp": {
+        "message": "SillyChat ein/aus.",
+        "description": "SillyChatPlugin.<.ctor>b__2_0"
+    },
+    "SettingsTitle": {
+        "message": "SillyChat Einstellungen",
+        "description": "ConfigWindow..ctor"
+    },
+    "PluginEnabled": {
+        "message": "Aktiviert",
+        "description": "ConfigWindow.Draw"
+    },
+    "PluginEnabled_HelpMarker": {
+        "message": "Aktiviere oder deaktiviere das Plugin",
+        "description": "ConfigWindow.Draw"
+    },
+    "Translator": {
+        "message": "Übersetzer",
+        "description": "ConfigWindow.Draw"
+    },
+    "Translator_HelpMarker": {
+        "message": "Wähle den Übersetzer für den Chat text aus.",
+        "description": "ConfigWindow.Draw"
+    },
+    "HistoryTitle": {
+        "message": "SillyChat Chronik",
+        "description": "HistoryWindow..ctor"
+    },
+    "SourceMessage": {
+        "message": "Quelle",
+        "description": "HistoryWindow.Draw"
+    },
+    "TranslationMessage": {
+        "message": "Übersetzung",
+        "description": "HistoryWindow.Draw"
+    },
+    "NoTranslations": {
+        "message": "Derzeit wurde noch nichts Übersetzt.",
+        "description": "HistoryWindow.Draw"
+    },
+    "ConfigCommandHelp": {
+        "message": "SillyChat Konfigurationsfenster anzeigen.",
+        "description": "WindowManager..ctor"
+    },
+    "HistoryCommandHelp": {
+        "message": "SillyChat Chronik Fenster anzeigen.",
+        "description": "WindowManager..ctor"
+    }
+}
