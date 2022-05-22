@@ -19,6 +19,10 @@
         "message": "Включить",
         "description": "ConfigWindow.Draw"
     },
+    "PluginEnabled_HelpMarker": {
+        "message": "enable or disable the plugin",
+        "description": "ConfigWindow.Draw"
+    },
     "Translator": {
         "message": "Переводчик",
         "description": "ConfigWindow.Draw"
