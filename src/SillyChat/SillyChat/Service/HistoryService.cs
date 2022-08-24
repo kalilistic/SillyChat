@@ -71,7 +71,7 @@ namespace SillyChat
             this.processTranslationsTimer.Elapsed -= this.ProcessTranslationsTimerOnElapsed;
         }
 
-        private void ProcessTranslationsTimerOnElapsed(object sender, ElapsedEventArgs e)
+        private void ProcessTranslationsTimerOnElapsed(object? sender, ElapsedEventArgs e)
         {
             try
             {

@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<Version>1.5.0.0</Version>
+		<Version>1.5.1.0</Version>
 		<Title>SillyChat</Title>
 		<Authors>kalilistic</Authors>
 		<TargetFramework>net6.0-windows</TargetFramework>
@@ -37,21 +37,21 @@
 		<WarningLevel>4</WarningLevel>
 	</PropertyGroup>
 	<ItemGroup>
-		<None Remove="stylecop.json"/>
+		<None Remove="stylecop.json" />
 		<AdditionalFiles Include="..\stylecop.json">
 			<Link>stylecop.json</Link>
 		</AdditionalFiles>
 	</ItemGroup>
 	<ItemGroup>
-		<None Remove="SillyChat\Resource\loc\de.json"/>
-		<None Remove="SillyChat\Resource\loc\es.json"/>
-		<None Remove="SillyChat\Resource\loc\fr.json"/>
-		<None Remove="SillyChat\Resource\loc\it.json"/>
-		<None Remove="SillyChat\Resource\loc\ja.json"/>
-		<None Remove="SillyChat\Resource\loc\no.json"/>
-		<None Remove="SillyChat\Resource\loc\pt.json"/>
-		<None Remove="SillyChat\Resource\loc\ru.json"/>
-		<None Remove="SillyChat\Resource\loc\zh.json"/>
+		<None Remove="SillyChat\Resource\loc\de.json" />
+		<None Remove="SillyChat\Resource\loc\es.json" />
+		<None Remove="SillyChat\Resource\loc\fr.json" />
+		<None Remove="SillyChat\Resource\loc\it.json" />
+		<None Remove="SillyChat\Resource\loc\ja.json" />
+		<None Remove="SillyChat\Resource\loc\no.json" />
+		<None Remove="SillyChat\Resource\loc\pt.json" />
+		<None Remove="SillyChat\Resource\loc\ru.json" />
+		<None Remove="SillyChat\Resource\loc\zh.json" />
 	</ItemGroup>
 	<ItemGroup>
 		<Reference Include="CheapLoc">
@@ -80,35 +80,35 @@
 		</Reference>
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="DalamudPackager" Version="2.1.7"/>
-		<PackageReference Include="Dalamud.DrunkenToad" Version="1.2.0"/>
-		<PackageReference Include="XivCommon" Version="5.0.1-alpha.1"/>
+		<PackageReference Include="DalamudPackager" Version="2.1.8" />
+		<PackageReference Include="Dalamud.DrunkenToad" Version="1.2.0" />
+		<PackageReference Include="XivCommon" Version="5.0.1-alpha.1" />
 		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
 	<ItemGroup>
-		<Folder Include="SillyChat\Resource\translation"/>
+		<Folder Include="SillyChat\Resource\translation" />
 	</ItemGroup>
 	<ItemGroup>
-		<None Remove="SillyChat\Resource\translation\de.json"/>
-		<EmbeddedResource Include="SillyChat\Resource\translation\de.json"/>
-		<None Remove="SillyChat\Resource\translation\es.json"/>
-		<EmbeddedResource Include="SillyChat\Resource\translation\es.json"/>
-		<None Remove="SillyChat\Resource\translation\fr.json"/>
-		<EmbeddedResource Include="SillyChat\Resource\translation\fr.json"/>
-		<None Remove="SillyChat\Resource\translation\it.json"/>
-		<EmbeddedResource Include="SillyChat\Resource\translation\it.json"/>
-		<None Remove="SillyChat\Resource\translation\ja.json"/>
-		<EmbeddedResource Include="SillyChat\Resource\translation\ja.json"/>
-		<None Remove="SillyChat\Resource\translation\no.json"/>
-		<EmbeddedResource Include="SillyChat\Resource\translation\no.json"/>
-		<None Remove="SillyChat\Resource\translation\pt.json"/>
-		<EmbeddedResource Include="SillyChat\Resource\translation\pt.json"/>
-		<None Remove="SillyChat\Resource\translation\ru.json"/>
-		<EmbeddedResource Include="SillyChat\Resource\translation\ru.json"/>
-		<None Remove="SillyChat\Resource\translation\zh.json"/>
-		<EmbeddedResource Include="SillyChat\Resource\translation\zh.json"/>
+		<None Remove="SillyChat\Resource\translation\de.json" />
+		<EmbeddedResource Include="SillyChat\Resource\translation\de.json" />
+		<None Remove="SillyChat\Resource\translation\es.json" />
+		<EmbeddedResource Include="SillyChat\Resource\translation\es.json" />
+		<None Remove="SillyChat\Resource\translation\fr.json" />
+		<EmbeddedResource Include="SillyChat\Resource\translation\fr.json" />
+		<None Remove="SillyChat\Resource\translation\it.json" />
+		<EmbeddedResource Include="SillyChat\Resource\translation\it.json" />
+		<None Remove="SillyChat\Resource\translation\ja.json" />
+		<EmbeddedResource Include="SillyChat\Resource\translation\ja.json" />
+		<None Remove="SillyChat\Resource\translation\no.json" />
+		<EmbeddedResource Include="SillyChat\Resource\translation\no.json" />
+		<None Remove="SillyChat\Resource\translation\pt.json" />
+		<EmbeddedResource Include="SillyChat\Resource\translation\pt.json" />
+		<None Remove="SillyChat\Resource\translation\ru.json" />
+		<EmbeddedResource Include="SillyChat\Resource\translation\ru.json" />
+		<None Remove="SillyChat\Resource\translation\zh.json" />
+		<EmbeddedResource Include="SillyChat\Resource\translation\zh.json" />
 	</ItemGroup>
 </Project>
