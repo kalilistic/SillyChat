@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Dalamud.DrunkenToad;
+using Dalamud.Logging;
 
 namespace SillyChat
 {
@@ -76,7 +77,7 @@ namespace SillyChat
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex, "Failed to get translation mode.");
+                PluginLog.LogError(ex, "Failed to get translation mode.");
                 return this.translationModes.First();
             }
         }

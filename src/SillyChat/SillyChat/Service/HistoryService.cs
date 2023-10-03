@@ -5,6 +5,7 @@ using System.Linq;
 using System.Timers;
 
 using Dalamud.DrunkenToad;
+using Dalamud.Logging;
 
 namespace SillyChat
 {
@@ -86,7 +87,7 @@ namespace SillyChat
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex, "Failed to process translations.");
+                PluginLog.LogError(ex, "Failed to process translations.");
                 this.IsProcessing = false;
             }
         }

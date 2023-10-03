@@ -4,15 +4,17 @@ using System.Threading.Tasks;
 
 using CheapLoc;
 using Dalamud.Configuration;
-using Dalamud.DrunkenToad;
+using Dalamud.DrunkenToad.Extensions;
 using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Game.Command;
-using Dalamud.Game.Gui;
 using Dalamud.Game.Text;
 using Dalamud.Game.Text.SeStringHandling;
 using Dalamud.Game.Text.SeStringHandling.Payloads;
 using Dalamud.IoC;
+using Dalamud.Logging;
 using Dalamud.Plugin;
+using Dalamud.Plugin.Services;
+using SillyChat.Localization;
 using XivCommon;
 using XivCommon.Functions;
 
@@ -24,7 +26,7 @@ namespace SillyChat
     public class SillyChatPlugin : ISillyChatPlugin, IDalamudPlugin
     {
         private XivCommonBase xivCommon = null!;
-        private Localization localization = null!;
+        private LegacyLoc localization = null!;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SillyChatPlugin"/> class.
@@ -34,9 +36,9 @@ namespace SillyChat
             Task.Run(() =>
             {
                 // setup common libs
-                this.localization = new Localization(PluginInterface, CommandManager);
+                this.localization = new LegacyLoc(PluginInterface, CommandManager);
                 const Hooks hooks = Hooks.Talk | Hooks.BattleTalk | Hooks.ChatBubbles;
-                this.xivCommon = new XivCommonBase(hooks);
+                this.xivCommon = new XivCommonBase(PluginInterface, hooks);
 
                 // load config
                 try
@@ -45,7 +47,7 @@ namespace SillyChat
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogError("Failed to load config so creating new one.", ex);
+                    PluginLog.LogError("Failed to load config so creating new one.", ex);
                     this.Configuration = new PluginConfig();
                     this.SaveConfig();
                 }
@@ -86,17 +88,14 @@ namespace SillyChat
         /// </summary>
         [PluginService]
         [RequiredVersion("1.0")]
-        public static ChatGui Chat { get; private set; } = null!;
+        public static IChatGui Chat { get; private set; } = null!;
 
         /// <summary>
         /// Gets command manager.
         /// </summary>
         [PluginService]
         [RequiredVersion("1.0")]
-        public static CommandManager CommandManager { get; private set; } = null!;
-
-        /// <inheritdoc />
-        public string Name => "SillyChat";
+        public static ICommandManager CommandManager { get; private set; } = null!;
 
         /// <summary>
         /// Gets translationService.
@@ -152,7 +151,7 @@ namespace SillyChat
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex, "Failed to dispose plugin properly.");
+                PluginLog.LogError(ex, "Failed to dispose plugin properly.");
             }
         }
 
@@ -236,7 +235,7 @@ namespace SillyChat
                         if (!input.Equals(output))
                         {
                             textPayload.Text = output;
-                            Logger.LogDebug($"{input}|{output}");
+                            PluginLog.LogDebug($"{input}|{output}");
                             this.HistoryService.AddTranslation(new Translation(input, output));
                         }
                     }
@@ -244,7 +243,7 @@ namespace SillyChat
             }
             catch
             {
-                Logger.LogDebug($"Failed to process message: {message}.");
+                PluginLog.LogDebug($"Failed to process message: {message}.");
             }
         }
 
@@ -255,9 +254,9 @@ namespace SillyChat
                 return;
             }
 
-            Chat.PluginPrintNotice(Loc.Localize("InstallThankYou", "Thank you for installing SillyChat!"));
+            Chat.Print(Loc.Localize("InstallThankYou", "Thank you for installing SillyChat!"));
             Thread.Sleep(500);
-            Chat.PluginPrintNotice(
+            Chat.Print(
                 Loc.Localize("Instructions", "You can use /silly to toggle the plugin, /sillyconfig to view settings, and /sillyhistory to see previous translations."));
             this.Configuration.FreshInstall = false;
             this.SaveConfig();

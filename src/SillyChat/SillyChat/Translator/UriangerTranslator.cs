@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 
 using Dalamud.DrunkenToad;
+using Dalamud.DrunkenToad.Extensions;
 
 namespace SillyChat
 {
