@@ -1,21 +1,40 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SillyChat", "SillyChat\SillyChat.csproj", "{EBAF1BDC-2509-4504-8A4B-ED9C563FBEB6}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SillyChat", "SillyChat\SillyChat.csproj", "{EBAF1BDC-2509-4504-8A4B-ED9C563FBEB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SillyChat.Test", "SillyChat.Test\SillyChat.Test.csproj", "{F69B7274-8325-41F4-AAE2-D5F99777878F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SillyChat.Test", "SillyChat.Test\SillyChat.Test.csproj", "{F69B7274-8325-41F4-AAE2-D5F99777878F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{EBAF1BDC-2509-4504-8A4B-ED9C563FBEB6}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{EBAF1BDC-2509-4504-8A4B-ED9C563FBEB6}.Debug|Any CPU.Build.0 = Debug|x64
+		{EBAF1BDC-2509-4504-8A4B-ED9C563FBEB6}.Debug|x64.ActiveCfg = Debug|x64
+		{EBAF1BDC-2509-4504-8A4B-ED9C563FBEB6}.Debug|x64.Build.0 = Debug|x64
 		{EBAF1BDC-2509-4504-8A4B-ED9C563FBEB6}.Release|Any CPU.ActiveCfg = Release|x64
 		{EBAF1BDC-2509-4504-8A4B-ED9C563FBEB6}.Release|Any CPU.Build.0 = Release|x64
+		{EBAF1BDC-2509-4504-8A4B-ED9C563FBEB6}.Release|x64.ActiveCfg = Release|x64
+		{EBAF1BDC-2509-4504-8A4B-ED9C563FBEB6}.Release|x64.Build.0 = Release|x64
 		{F69B7274-8325-41F4-AAE2-D5F99777878F}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{F69B7274-8325-41F4-AAE2-D5F99777878F}.Release|Any CPU.ActiveCfg = Release|x64
 		{F69B7274-8325-41F4-AAE2-D5F99777878F}.Debug|Any CPU.Build.0 = Debug|x64
+		{F69B7274-8325-41F4-AAE2-D5F99777878F}.Debug|x64.ActiveCfg = Debug|x64
+		{F69B7274-8325-41F4-AAE2-D5F99777878F}.Debug|x64.Build.0 = Debug|x64
+		{F69B7274-8325-41F4-AAE2-D5F99777878F}.Release|Any CPU.ActiveCfg = Release|x64
+		{F69B7274-8325-41F4-AAE2-D5F99777878F}.Release|x64.ActiveCfg = Release|x64
+		{F69B7274-8325-41F4-AAE2-D5F99777878F}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F9D2FC74-0984-4E00-BB7B-9B5FC27D920F}
 	EndGlobalSection
 EndGlobal

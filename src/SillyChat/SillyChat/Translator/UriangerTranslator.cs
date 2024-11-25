@@ -1,10 +1,9 @@
+using SillyChat.SillyChat.Service;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-using Dalamud.DrunkenToad;
-using Dalamud.DrunkenToad.Extensions;
 
 namespace SillyChat
 {
@@ -86,8 +85,8 @@ namespace SillyChat
 
         private static string RunPostFixes(string str)
         {
-            str = str.EnsureEndsWithDot();
-            str = str.CapitalizeFirst();
+            StringService.EnsureEndsWithDot(str);
+            StringService.CapitalizeFirst(str);
             str = str.Replace("  ", " ");
             str = str.Replace(" .", ".");
             str = str.Replace(" i ", " I ");
