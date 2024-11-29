@@ -24,7 +24,7 @@ namespace SillyChat
     public class SillyChatPlugin : ISillyChatPlugin, IDalamudPlugin
     {
         private LegacyLoc localization = null!;
-        private HooksService Hooks = null!;
+        private HooksService hooks = null!;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SillyChatPlugin"/> class.
@@ -35,7 +35,7 @@ namespace SillyChat
             {
                 // setup common libs
                 this.localization = new LegacyLoc(PluginInterface, CommandManager);
-                this.Hooks = new HooksService();
+                this.hooks = new HooksService();
 
                 // load config
                 try
@@ -54,9 +54,10 @@ namespace SillyChat
                 this.HistoryService = new HistoryService(this);
                 Chat.ChatMessage += this.ChatMessage;
 
-                this.Hooks.OnBattleTalkDelegate += this.OnBattleTalk;
-                this.Hooks.OnTalkDelegate += this.OnTalk;
-                this.Hooks.OnChatBubbleDelegate += this.OnChatBubble;
+                // Requires updated sigs
+                //this.Hooks.OnBattleTalkDelegate += this.OnBattleTalk;
+                //this.Hooks.OnTalkDelegate += this.OnTalk;
+                this.hooks.OnChatBubbleDelegate += this.OnChatBubble;
 
                 // setup ui
                 this.WindowManager = new WindowManager(this);
@@ -87,11 +88,11 @@ namespace SillyChat
                 CommandManager.RemoveHandler("/silly");
                 Chat.ChatMessage -= this.ChatMessage;
 
-                // xiv common
-                Hooks.OnChatBubbleDelegate -= this.OnChatBubble;
-                Hooks.OnBattleTalkDelegate -= this.OnBattleTalk;
-                Hooks.OnTalkDelegate -= this.OnTalk;
-                this.Hooks.Dispose();
+                // Requires updated sigs
+                //Hooks.OnBattleTalkDelegate -= this.OnBattleTalk;
+                //Hooks.OnTalkDelegate -= this.OnTalk;
+                hooks.OnChatBubbleDelegate -= this.OnChatBubble;
+                this.hooks.Dispose();
 
                 // localization
                 this.localization.Dispose();
