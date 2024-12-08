@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 
 using CheapLoc;
 using Dalamud.Configuration;
+using Dalamud.Game.Addon.Lifecycle;
+using Dalamud.Game.Addon.Lifecycle.AddonArgTypes;
 using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Game.Command;
 using Dalamud.Game.Text;
@@ -24,7 +26,7 @@ namespace SillyChat
     public class SillyChatPlugin : ISillyChatPlugin, IDalamudPlugin
     {
         private LegacyLoc localization = null!;
-        private HooksService hooks = null!;
+        private GameFunctions gameFunctions = null!;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SillyChatPlugin"/> class.
@@ -35,7 +37,7 @@ namespace SillyChat
             {
                 // setup common libs
                 this.localization = new LegacyLoc(PluginInterface, CommandManager);
-                this.hooks = new HooksService();
+                this.gameFunctions = new GameFunctions();
 
                 // load config
                 try
@@ -54,10 +56,10 @@ namespace SillyChat
                 this.HistoryService = new HistoryService(this);
                 Chat.ChatMessage += this.ChatMessage;
 
-                // Requires updated sigs
-                //this.Hooks.OnBattleTalkDelegate += this.OnBattleTalk;
-                //this.Hooks.OnTalkDelegate += this.OnTalk;
-                this.hooks.OnChatBubbleDelegate += this.OnChatBubble;
+                // Requires updated sigs and I'll do that later
+                //AddonLifecycle.RegisterListener(AddonEvent.PreRefresh, "Talk", this.OnTalk);
+                //AddonLifecycle.RegisterListener(AddonEvent.PreRefresh, "_BattleTalk", this.OnBattleTalk);
+                this.gameFunctions.OnChatBubbleDelegate += this.OnChatBubble;
 
                 // setup ui
                 this.WindowManager = new WindowManager(this);
@@ -88,11 +90,10 @@ namespace SillyChat
                 CommandManager.RemoveHandler("/silly");
                 Chat.ChatMessage -= this.ChatMessage;
 
-                // Requires updated sigs
-                //Hooks.OnBattleTalkDelegate -= this.OnBattleTalk;
-                //Hooks.OnTalkDelegate -= this.OnTalk;
-                hooks.OnChatBubbleDelegate -= this.OnChatBubble;
-                this.hooks.Dispose();
+                // Requires updated sigs and I'll do that later
+                //AddonLifecycle.UnregisterListener(AddonEvent.PreRefresh, "Talk", this.OnTalk);
+                //AddonLifecycle.UnregisterListener(AddonEvent.PreRefresh, "_BattleTalk", this.OnBattleTalk);
+                this.gameFunctions.OnChatBubbleDelegate -= this.OnChatBubble;
 
                 // localization
                 this.localization.Dispose();
@@ -134,6 +135,12 @@ namespace SillyChat
         public static IPluginLog PluginLog { get; private set; } = null!;
 
         /// <summary>
+        /// Gets the AddonLifecycle.
+        /// </summary>
+        [PluginService]
+        public static IAddonLifecycle AddonLifecycle { get; private set; } = null!;
+
+        /// <summary>
         /// Gets translationService.
         /// </summary>
         public TranslationService TranslationService { get; private set; } = null!;
@@ -155,6 +162,11 @@ namespace SillyChat
         /// Gets or sets window manager.
         /// </summary>
         public WindowManager WindowManager { get; set; } = null!;
+
+        /// <summary>
+        /// Gets or sets the game interop provider.
+        /// </summary>
+        public IGameInteropProvider GameInteropProvider { get; set; } = null!;
 
         /// <inheritdoc/>
         public void SaveConfig()
@@ -189,29 +201,33 @@ namespace SillyChat
             this.Translate(message);
         }
 
-        private void OnTalk(ref SeString name, ref SeString text, ref XivCommon.Functions.TalkStyle style)
+        //private void OnTalk(ref SeString name, ref SeString text, ref XivCommon.Functions.TalkStyle style)
+        private void OnTalk(AddonEvent type, AddonArgs args)
         {
             if (!this.Configuration.Enabled)
             {
                 return;
             }
 
-            this.Translate(text);
+            if (args is AddonRefreshArgs setupArgs)
+            {
+                if (setupArgs.AtkValueSpan.ToString() is string) this.Translate(setupArgs.AtkValueSpan.ToString());
+            }
         }
 
-        private void OnBattleTalk(ref SeString sender, ref SeString message, ref XivCommon.Functions.BattleTalkOptions options, ref bool isHandled)
+        //private void OnBattleTalk(ref SeString sender, ref SeString message, ref XivCommon.Functions.BattleTalkOptions options, ref bool isHandled)
+        private void OnBattleTalk(AddonEvent type, AddonArgs args)
         {
             if (!this.Configuration.Enabled)
             {
                 return;
             }
 
-            if (isHandled)
+            if (args is AddonRefreshArgs setupArgs)
             {
-                return;
+                if (setupArgs.AtkValueSpan.ToString() is string) this.Translate(setupArgs.AtkValueSpan.ToString());
             }
 
-            this.Translate(message);
         }
 
         private void OnChatBubble(ref IGameObject gameObject, ref SeString text)
